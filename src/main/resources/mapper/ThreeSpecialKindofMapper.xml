@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.ThreeSpecialKindofMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.ThreeSpecialKindof">
+    <!--@mbg.generated generated on Thu Sep 26 13:08:37 CST 2019.-->
+    <!--@Table three_special_kindof-->
+    <id column="three_special_id" jdbcType="INTEGER" property="threeSpecialId" />
+    <result column="three_special_name" jdbcType="VARCHAR" property="threeSpecialName" />
+    <result column="special_kind_id" jdbcType="INTEGER" property="specialKindId" />
+    <result column="special_id" jdbcType="INTEGER" property="specialId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Thu Sep 26 13:08:37 CST 2019.-->
+    three_special_id, three_special_name, special_kind_id, special_id
+  </sql>
+</mapper>

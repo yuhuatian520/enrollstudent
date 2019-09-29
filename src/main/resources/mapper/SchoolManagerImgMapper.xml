@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.SchoolManagerImgMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.SchoolManagerImg">
+    <!--@mbg.generated generated on Sat Sep 28 17:28:22 CST 2019.-->
+    <!--@Table school_manager_img-->
+    <result column="student_img_id" jdbcType="INTEGER" property="studentImgId" />
+    <result column="student_img_name" jdbcType="VARCHAR" property="studentImgName" />
+    <result column="student_img_url" jdbcType="VARCHAR" property="studentImgUrl" />
+    <result column="sign" jdbcType="SMALLINT" property="sign" />
+    <result column="school_id" jdbcType="INTEGER" property="schoolId" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.StudentManageMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.StudentManage">
+    <!--@mbg.generated generated on Wed Sep 25 13:25:42 CST 2019.-->
+    <!--@Table student_manage-->
+    <id column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="student_name" jdbcType="VARCHAR" property="studentName" />
+    <result column="student_schoolname" jdbcType="VARCHAR" property="studentSchoolname" />
+    <result column="student_age" jdbcType="INTEGER" property="studentAge" />
+    <result column="student_sex" jdbcType="SMALLINT" property="studentSex" />
+    <result column="student_phone" jdbcType="VARCHAR" property="studentPhone" />
+    <result column="student_wish" jdbcType="VARCHAR" property="studentWish" />
+    <result column="personality_id" jdbcType="VARCHAR" property="personalityId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="mark" jdbcType="SMALLINT" property="mark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Wed Sep 25 13:25:42 CST 2019.-->
+    student_id, student_name, student_schoolname, student_age, student_sex, student_phone, 
+    student_wish, personality_id, create_time, mark
+  </sql>
+</mapper>

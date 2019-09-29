@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.SchoolManageMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.SchoolManage">
+    <!--@mbg.generated generated on Wed Sep 25 12:00:19 CST 2019.-->
+    <!--@Table school_manage-->
+    <id column="school_id" jdbcType="INTEGER" property="schoolId" />
+    <result column="school_name" jdbcType="VARCHAR" property="schoolName" />
+    <result column="school_presentation" jdbcType="VARCHAR" property="schoolPresentation" />
+    <result column="school_img" jdbcType="VARBINARY" property="schoolImg" />
+    <result column="school_recommend" jdbcType="SMALLINT" property="schoolRecommend" />
+    <result column="school_hot" jdbcType="SMALLINT" property="schoolHot" />
+    <result column="school_special_id" jdbcType="INTEGER" property="schoolSpecialId" />
+    <result column="is_attention" jdbcType="SMALLINT" property="isAttention" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Wed Sep 25 12:00:19 CST 2019.-->
+    school_id, school_name, school_presentation, school_img, school_recommend, school_hot, 
+    school_special_id, is_attention
+  </sql>
+</mapper>

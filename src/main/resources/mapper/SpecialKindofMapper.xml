@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.SpecialKindofMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.SpecialKindof">
+    <!--@mbg.generated generated on Wed Sep 25 18:19:14 CST 2019.-->
+    <!--@Table special_kindof-->
+    <id column="special_kind_id" jdbcType="INTEGER" property="specialKindId" />
+    <result column="special_kind_name" jdbcType="VARCHAR" property="specialKindName" />
+    <result column="special_id" jdbcType="INTEGER" property="specialId" />
+    <result column="kind_id" jdbcType="INTEGER" property="kindId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Wed Sep 25 18:19:14 CST 2019.-->
+    special_kind_id, special_kind_name, special_id, kind_id
+  </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+      select * from special_kindof sp where sp.kind_id=#{kindId,jdbcType=INTEGER}
+    </select>
+
+
+</mapper>

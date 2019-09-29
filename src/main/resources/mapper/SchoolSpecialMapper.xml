@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.SchoolSpecialMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.SchoolSpecial">
+    <!--@mbg.generated generated on Wed Sep 25 13:25:11 CST 2019.-->
+    <!--@Table school_special-->
+    <id column="special_id" jdbcType="INTEGER" property="specialId" />
+    <result column="special_name" jdbcType="VARCHAR" property="specialName" />
+    <result column="special_presentation" jdbcType="VARCHAR" property="specialPresentation" />
+    <result column="special_hot" jdbcType="SMALLINT" property="specialHot" />
+    <result column="special_recommend" jdbcType="SMALLINT" property="specialRecommend" />
+    <result column="special_score" jdbcType="INTEGER" property="specialScore" />
+    <result column="special_year" jdbcType="DATE" property="specialYear" />
+    <result column="special_people_number" jdbcType="BIGINT" property="specialPeopleNumber" />
+    <result column="special_people_plan" jdbcType="BIGINT" property="specialPeoplePlan" />
+    <result column="special_practical" jdbcType="BIGINT" property="specialPractical" />
+    <result column="special_grade" jdbcType="DOUBLE" property="specialGrade" />
+    <result column="special_code" jdbcType="INTEGER" property="specialCode" />
+    <result column="data_package_id" jdbcType="VARCHAR" property="dataPackageId" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="mark" jdbcType="SMALLINT" property="mark" />
+    <result column="is_attention" jdbcType="SMALLINT" property="isAttention" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Wed Sep 25 13:25:11 CST 2019.-->
+    special_id, special_name, special_presentation, special_hot, special_recommend, special_score, 
+    special_year, special_people_number, special_people_plan, special_practical, special_grade, 
+    special_code, data_package_id, student_id, mark, is_attention
+  </sql>
+</mapper>
