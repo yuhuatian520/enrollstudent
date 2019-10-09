@@ -23,7 +23,9 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/schoolmanagerinfo/")
-public class SchoolManagerController {
+public class SchoolManagerController
+
+{
 
     @Autowired
     private SchoolManageService schoolManageService;
@@ -46,6 +48,7 @@ public class SchoolManagerController {
      */
     @PostMapping("updateschoolinfo")
     public JsonResult updateSchoolManagerInfo(@RequestBody SchoolManage schoolManage){
+        System.out.println("修改的信息:"+schoolManage);
         if ("{}".equals(JSON.toJSONString(schoolManage)))return JsonResult.errorMsg("数据为空,失败");
             Integer sign=schoolManageService.updateShoolManagerInfo(schoolManage);
                 if (sign>0)return JsonResult.ok();
@@ -91,21 +94,34 @@ public class SchoolManagerController {
     }
 
     /**
-     * 模糊查询学校信息!
+     * 模糊查询学校信息! 根据地址查询学校信息...
      * @param schoolName
+     * @param  schoolAddress
      * @return
      */
     @GetMapping("vaguesearchschoolinfo")
     public JsonResult vagueSearchSchoolInfos(@RequestParam(required = false,defaultValue = "1") Integer startPage,
                                              @RequestParam(required = false,defaultValue = "6") Integer pageSize,
-                                             @RequestParam(required = false)  String schoolName)
-    {
-        if (StringUtil.isNotEmpty(schoolName.trim())){
-            Page<SchoolManage> info = PageHelper.startPage(startPage, pageSize);
-            List<SchoolManage> schoolManagerListInfo = schoolManageService.vagueSearchSchoolManagerInfo(schoolName);
-            return JsonResult.ok(schoolManagerListInfo);
-        }
-            return querySchoolManagerInfoAlls(startPage,pageSize);
+                                             @RequestParam(required = false)  String schoolName,
+                                             @RequestParam(required = false)  String schoolAddress
+    ) {
+        //根据学校的地址查询学校
+        if (schoolAddress!=null) {
+            return JsonResult.ok(schoolManageService.querySchoolManagerInfosBySchoolAddress(schoolAddress));
+        } else
+            if (StringUtil.isNotEmpty(schoolName.trim())) {
+                Page<SchoolManage> info = PageHelper.startPage(startPage, pageSize);
+                List<SchoolManage> schoolManagerListInfo = schoolManageService.vagueSearchSchoolManagerInfo(schoolName);
+                return JsonResult.ok(schoolManagerListInfo);
+            } else {
+                return querySchoolManagerInfoAlls(startPage, pageSize);
+            }
+
     }
+
+
+
+
+
 
 }

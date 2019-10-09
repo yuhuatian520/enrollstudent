@@ -1,6 +1,7 @@
 package com.yunhang.utils.alibabautils;
 
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
@@ -30,5 +31,26 @@ public class FileUtils {
         }
         return false;
     }
+
+    /**
+     * 检测文件是否合法!
+     * @param file
+     * @return Boolean
+     */
+    public static Boolean checkExcelFileInfo(MultipartFile file){
+        log.info("我倒要看看文件类型:"+file);
+        //定义文件类型
+        val as = Arrays.asList("xls", "xlsx");
+        //获取文件名称的后缀
+        val suffixName=file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1).toLowerCase();
+        log.info("后缀名称:"+suffixName);
+        for (String a : as) {
+            if (a.equals(suffixName))return true;
+        }
+         return false;
+    }
+
+
+
 
 }

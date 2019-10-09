@@ -1,11 +1,13 @@
 package com.yunhang.controller;
 
+import com.yunhang.service.SchoolManageService;
 import com.yunhang.utils.JsonResult;
 import com.yunhang.utils.alibabautils.AliBaBaUploadUtil;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +26,9 @@ import java.util.stream.Collectors;
 public class TestController {
 
     private final AliBaBaUploadUtil aliBaBaUploadUtil=new AliBaBaUploadUtil();
+
+    @Resource
+    private SchoolManageService schoolManageService;
 
     /**
      * 单文件上传
@@ -44,7 +49,7 @@ public class TestController {
      */
     @PostMapping("/uploadfileinfofiles")
     public List uploadFileInfoToAliOssAlls(List<MultipartFile> files) throws IOException {
-      return  files.parallelStream().map(s-> {
+      return   files.parallelStream().map(s-> {
                   try {
                       return JsonResult.ok(aliBaBaUploadUtil.uploadFileToOss(s));
                   } catch (IOException e) {
@@ -54,6 +59,19 @@ public class TestController {
               }
       ).collect(Collectors.toList());
     }
+
+    /**
+     * Excel文件导入操作!
+     * @param file
+     * @return
+     */
+    @PostMapping("importexcels")
+    public JsonResult importExcelInfos(MultipartFile file) throws Exception {
+       Integer mark=schoolManageService.readExcelInfo(file);
+       if(mark>0)return JsonResult.ok();
+       else return JsonResult.errorMsg("导入失败,请检查文件是否合法!");
+    }
+
 
 
 

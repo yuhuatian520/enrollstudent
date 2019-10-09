@@ -1,8 +1,12 @@
 package com.yunhang.service;
 
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
+import com.yunhang.entity.SchoolManagerImg;
 import com.yunhang.mapper.SchoolManagerImgMapper;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+
 /**
  \* Created with IntelliJ IDEA.
  \* User: 王耀
@@ -17,4 +21,8 @@ public class SchoolManagerImgService{
     @Resource
     private SchoolManagerImgMapper schoolManagerImgMapper;
 
+
+    public List<SchoolManagerImg> findSchoolInfoImgBySchoolIdAndSign(Integer schoolId, Short sign) {
+        return schoolManagerImgMapper.selectAll();
+    }
 }
