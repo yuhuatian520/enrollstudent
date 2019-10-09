@@ -1,8 +1,23 @@
 package com.yunhang.entity;
 
-import javax.persistence.*;
+import cn.afterturn.easypoi.excel.annotation.Excel;
+import cn.afterturn.easypoi.excel.annotation.ExcelTarget;
 import lombok.Data;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ * \* Created with IntelliJ IDEA.
+ * \* User: 王耀
+ * \* Date: 2019/10/8
+ * \* Time: 11:41
+ * \* To change this template use File | Settings | File Templates.
+ * \* Description:
+ * \
+ */
+@ExcelTarget("SchoolManage")
 @Data
 @Table(name = "school_manage")
 public class SchoolManage {
@@ -11,24 +26,28 @@ public class SchoolManage {
      */
     @Id
     @Column(name = "school_id")
+    @Excel(name = "序号")
     private Integer schoolId;
 
     /**
      * 学校名称
      */
     @Column(name = "school_name")
+    @Excel(name = "名称")
     private String schoolName;
 
     /**
      * 学校介绍
      */
     @Column(name = "school_presentation")
+    @Excel(name = "学校简介")
     private String schoolPresentation;
 
     /**
      * 学校环境图
      */
     @Column(name = "school_img")
+    @Excel(name = "学校图片")
     private byte[] schoolImg;
 
     /**
@@ -54,4 +73,24 @@ public class SchoolManage {
      */
     @Column(name = "is_attention")
     private Short isAttention;
+
+    /**
+     * 联系方式
+     */
+    @Column(name = "scholl_phone")
+    @Excel(name = "联系电话")
+    private String schollPhone;
+
+    /**
+     * 学校网址
+     */
+    @Column(name = "school_url")
+    private String schoolUrl;
+
+    /**
+     * 学校地址
+     */
+    @Column(name = "school_address")
+    @Excel(name = "地址")
+    private String schoolAddress;
 }

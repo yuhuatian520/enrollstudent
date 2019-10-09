@@ -18,7 +18,6 @@ public class NoticeController {
     @Resource
     private NoticeService noticeService;
 
-
     @RequestMapping("selectnoticebyid")
     public JsonResult queryNoticeByNoticeId(Notice notice){
         NoticeDto noticeinfo = noticeService.queryNoticeByNoticeId(notice);
