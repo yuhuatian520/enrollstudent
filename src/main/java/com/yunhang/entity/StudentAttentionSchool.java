@@ -1,16 +1,10 @@
 package com.yunhang.entity;
 
-import javax.persistence.*;
 import lombok.Data;
 
-/**
- \* Created with IntelliJ IDEA.
- \* User: 王耀
- \* Date: 2019/9/27
- \* Time: 10:01
- \* To change this template use File | Settings | File Templates.
- \* Description: 
- \*/
+import javax.persistence.Column;
+import javax.persistence.Table;
+
 @Data
 @Table(name = "student_attention_school")
 public class StudentAttentionSchool {
@@ -25,4 +19,6 @@ public class StudentAttentionSchool {
      */
     @Column(name = "school_id")
     private Integer schoolId;
+
+
 }

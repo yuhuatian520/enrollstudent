@@ -5,8 +5,13 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Id;
 
+/**
+ * @author yangchunlu
+ * @date 2019-9-28
+ */
 @Data
 public class NoticeDto {
+
 
     /**
      * 公告编号
@@ -27,7 +32,8 @@ public class NoticeDto {
     @Column(name = "notice_content")
     private String noticeContent;
 
-
+    //学校名称
+    private String schoolName;
 
 
 

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yunhang.mapper.NoticeMapper">
   <resultMap id="BaseResultMap" type="com.yunhang.entity.Notice">
-    <!--@mbg.generated generated on Thu Sep 26 16:36:55 CST 2019.-->
+    <!--@mbg.generated generated on Wed Sep 25 14:41:54 CST 2019.-->
     <!--@Table notice-->
-    <id column="notice_id" jdbcType="INTEGER" property="noticeId" />
+    <id column="notice_id" jdbcType="VARCHAR" property="noticeId" />
     <result column="notice_name" jdbcType="VARCHAR" property="noticeName" />
     <result column="notice_content" jdbcType="VARCHAR" property="noticeContent" />
     <result column="school_id" jdbcType="INTEGER" property="schoolId" />
@@ -12,9 +12,9 @@
     <result column="mark" jdbcType="SMALLINT" property="mark" />
   </resultMap>
   <sql id="Base_Column_List">
-    <!--@mbg.generated generated on Thu Sep 26 16:36:55 CST 2019.-->
-    notice_id, notice_name, notice_content, school_id, sign, mark
-  </sql>
+  <!--@mbg.generated generated on Wed Sep 25 14:41:54 CST 2019.-->
+  notice_id, notice_name, notice_content, school_id, sign, mark
+</sql>
 
   <select id="addNotice" resultMap="BaseResultMap">
     select n.notice_id, notice_name, notice_content, school_id, sign from notice n where n.notice_id=#{noticeId,jdbcType=VARCHAR}
