@@ -1,13 +1,17 @@
 package com.yunhang.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.yunhang.dto.NoticeDto;
 import com.yunhang.entity.Notice;
+import com.yunhang.entity.StudentManage;
 import com.yunhang.service.NoticeService;
 import com.yunhang.utils.JsonResult;
 import com.yunhang.utils.ReturnCode;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -31,13 +35,17 @@ public class NoticeController {
      */
 
     @RequestMapping("selectallnotice")
-    public JsonResult queryAllNotice(){
+    public JsonResult queryAllNotice(@RequestParam(required = false,defaultValue = "1") Integer startPage,
+                                     @RequestParam(required = false,defaultValue = "6") Integer pageSize){
         //接收查询到的所有公告,没有公告时,查询成功但返回的是null
-        List<NoticeDto> noticeinfo = noticeService.queryAllNotice();
+        Page<NoticeDto> info = PageHelper.startPage(startPage, pageSize);
+        List<NoticeDto> noticeList = noticeService.queryAllNotice();
+        return JsonResult.ok(noticeList);
+       /* List<NoticeDto> noticeinfo = noticeService.queryAllNotice();
         if(noticeinfo.isEmpty())
             return   JsonResult.build(ReturnCode.objectNull,"failure",null);
         else
-            return   JsonResult.build(ReturnCode.okayCode,"success",noticeinfo);
+            return   JsonResult.build(ReturnCode.okayCode,"success",noticeinfo);*/
 
     }
 
