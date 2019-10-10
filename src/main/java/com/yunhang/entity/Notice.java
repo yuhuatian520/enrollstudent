@@ -1,17 +1,11 @@
 package com.yunhang.entity;
 
-import javax.persistence.*;
 import lombok.Data;
 
-/**
- * \* Created with IntelliJ IDEA.
- * \* User: 王耀
- * \* Date: 2019/9/26
- * \* Time: 16:36
- * \* To change this template use File | Settings | File Templates.
- * \* Description:
- * \
- */
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Data
 @Table(name = "notice")
 public class Notice {
@@ -20,8 +14,7 @@ public class Notice {
      */
     @Id
     @Column(name = "notice_id")
-    @GeneratedValue(generator = "JDBC")
-    private Integer noticeId;
+    private String noticeId;
 
     /**
      * 公告名称
@@ -52,4 +45,6 @@ public class Notice {
      */
     @Column(name = "mark")
     private Short mark;
+
+
 }
