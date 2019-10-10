@@ -1,6 +1,9 @@
 package com.yunhang.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.yunhang.entity.SchoolManage;
 import com.yunhang.entity.StudentManage;
 import com.yunhang.service.StudentManageService;
 import com.yunhang.utils.JsonResult;
@@ -8,6 +11,7 @@ import com.yunhang.utils.ReturnCode;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -23,6 +27,15 @@ public class StudentManageController {
 
     @Resource
     private StudentManageService studentManageService;
+
+    @RequestMapping("selectallstudentinfo")
+    public JsonResult queryAllStudentInfo(@RequestParam(required = false,defaultValue = "1") Integer startPage,
+                                          @RequestParam(required = false,defaultValue = "6") Integer pageSize){
+
+        Page<StudentManage> info = PageHelper.startPage(startPage, pageSize);
+        List<StudentManage> studentManagerList = studentManageService.queryAllStudentInfo();
+        return JsonResult.ok(studentManagerList);
+    }
 
     /**
      *

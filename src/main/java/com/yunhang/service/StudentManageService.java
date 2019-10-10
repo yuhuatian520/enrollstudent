@@ -22,6 +22,13 @@ public class StudentManageService{
     private StudentManageMapper studentManageMapper;
 
     /**
+     * 查询所有学生信息
+     * @return
+     */
+    public List<StudentManage> queryAllStudentInfo(){
+        return studentManageMapper.selectAll();
+    }
+    /**
      *
      * 通过Name查询学生信息
      */
