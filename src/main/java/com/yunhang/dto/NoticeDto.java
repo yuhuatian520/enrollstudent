@@ -45,6 +45,6 @@ public class NoticeDto {
     //学校名称
     private String schoolName;
 
-
+    private String createTime;
 
 }
