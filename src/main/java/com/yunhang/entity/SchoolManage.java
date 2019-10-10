@@ -1,7 +1,6 @@
 package com.yunhang.entity;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
-import cn.afterturn.easypoi.excel.annotation.ExcelTarget;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -17,7 +16,6 @@ import javax.persistence.Table;
  * \* Description:
  * \
  */
-@ExcelTarget("SchoolManage")
 @Data
 @Table(name = "school_manage")
 public class SchoolManage {
@@ -48,7 +46,7 @@ public class SchoolManage {
      */
     @Column(name = "school_img")
     @Excel(name = "学校图片")
-    private byte[] schoolImg;
+    private String schoolImg;
 
     /**
      * 是否推荐(4,推荐:8,不推荐)
@@ -93,4 +91,11 @@ public class SchoolManage {
     @Column(name = "school_address")
     @Excel(name = "地址")
     private String schoolAddress;
+
+
+    public SchoolManage() {
+    }
+
+
+
 }
