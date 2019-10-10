@@ -7,7 +7,7 @@
     <id column="school_id" jdbcType="INTEGER" property="schoolId" />
     <result column="school_name" jdbcType="VARCHAR" property="schoolName" />
     <result column="school_presentation" jdbcType="VARCHAR" property="schoolPresentation" />
-    <result column="school_img" jdbcType="VARBINARY" property="schoolImg" />
+    <result column="school_img" jdbcType="VARCHAR" property="schoolImg" />
     <result column="school_recommend" jdbcType="SMALLINT" property="schoolRecommend" />
     <result column="school_hot" jdbcType="SMALLINT" property="schoolHot" />
     <result column="school_special_id" jdbcType="INTEGER" property="schoolSpecialId" />

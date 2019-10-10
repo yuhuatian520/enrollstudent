@@ -9,8 +9,8 @@ import com.yunhang.mapper.SchoolManageMapper;
 import com.yunhang.mapper.StudentAttentionSchoolMapper;
 import com.yunhang.utils.RandomNumberGenerator;
 import com.yunhang.utils.alibabautils.FileUtils;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -19,11 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
+@Slf4j
 @Service
 public class SchoolManageService{
 
@@ -138,26 +138,20 @@ public class SchoolManageService{
          * @param file
          * @return 0,1 成功与否!
          */
-        public Integer readExcelInfo(MultipartFile file) throws Exception {
-            System.out.println("我看看文件:"+file);
-            Boolean mark = FileUtils.checkExcelFileInfo(file);
-            System.out.println("读取通过吗:"+mark);
-            if (mark){
-                val params=new ImportParams();
-                params.setTitleRows(1);
+        public String readExcelInfo(MultipartFile file) throws Exception {
+            if (FileUtils.checkExcelFileInfo(file)) {
+                val params = new ImportParams();
+                params.setTitleRows(0);
                 params.setHeadRows(1);
-                //org.apache.commons.io.FileUtils.copyInputStreamToFile(excelFile.getInputStream(), new File(Objects.requireNonNull(excelFile.getOriginalFilename())));
-                InputStream inpt = file.getInputStream();
-                File newFile = new File(file.getOriginalFilename());
-                file.transferTo(newFile);
-                List<SchoolManage> list = ExcelImportUtil.importExcel((File) file,SchoolManage.class,params);
-                System.out.println("我看看list:"+list);
-                System.out.println(ReflectionToStringBuilder.toString(list.get(0)));
-                return 1;
+                List<SchoolManage> list = ExcelImportUtil.importExcel(file.getInputStream(),
+                        SchoolManage.class, params);
+                CompletableFuture.runAsync(()->list.parallelStream().forEach(schoolManage -> {
+                    schoolManageMapper.insertSelective(schoolManage);
+                }));
+                return "导入成功";
             }
-            return 0;
+
+            return "文件不合法";
+        }
         }
 
-
-
-}

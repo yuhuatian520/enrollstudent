@@ -4,6 +4,7 @@ import com.yunhang.service.SchoolManageService;
 import com.yunhang.utils.JsonResult;
 import com.yunhang.utils.alibabautils.AliBaBaUploadUtil;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -66,10 +67,9 @@ public class TestController {
      * @return
      */
     @PostMapping("importexcels")
-    public JsonResult importExcelInfos(MultipartFile file) throws Exception {
-       Integer mark=schoolManageService.readExcelInfo(file);
-       if(mark>0)return JsonResult.ok();
-       else return JsonResult.errorMsg("导入失败,请检查文件是否合法!");
+    public String importExcelInfos(@RequestParam("file") MultipartFile file) throws Exception {
+       String mark=schoolManageService.readExcelInfo(file);
+       return mark;
     }
 
 
