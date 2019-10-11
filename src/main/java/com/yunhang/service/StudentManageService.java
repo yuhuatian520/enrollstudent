@@ -27,7 +27,9 @@ public class StudentManageService{
      * @return
      */
     public List<StudentManage> queryAllStudentInfo(){
-        return studentManageMapper.selectAll();
+
+        return studentManageMapper.selectallStudentInfo();
+
     }
     /**
      *
@@ -41,6 +43,7 @@ public class StudentManageService{
         else {
             //模糊查询所有学生信息
             List<StudentManage> result= studentManageMapper.selectStudentInfoByName(studentName);
+
             /*for (StudentManage s:result ) {
                 if(s.getMark()==8)
                 result.remove(s);

@@ -6,6 +6,7 @@ import com.yunhang.entity.StudentAttentionSchool;
 import com.yunhang.service.StudentAttentionSchoolService;
 import com.yunhang.utils.JsonResult;
 import com.yunhang.utils.ReturnCode;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,7 +48,7 @@ public class StudentAttentionSchoolController {
      * 学校意向添加(添加收藏)
      */
     @RequestMapping("addAttentionSchoolByStuId")
-    public JsonResult addAttentionSchool(StudentAttentionSchool studentAttentionSchool){
+    public JsonResult addAttentionSchool(@RequestBody StudentAttentionSchool studentAttentionSchool){
         //判断传入参数是否为空
         if("{}".equals(JSON.toJSONString(studentAttentionSchool)))
             return JsonResult.errorMsg("数据传入为空,添加失败!");
