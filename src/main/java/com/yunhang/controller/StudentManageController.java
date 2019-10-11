@@ -60,7 +60,7 @@ public class StudentManageController {
     @RequestMapping("selectstudentinfobyid")
     public JsonResult queryStudentInfoByName(Integer studentId){
 
-        List<StudentManage> selectStudentInfo=studentManageService.queryStudentInfoById(studentId);
+        StudentManage selectStudentInfo=studentManageService.queryStudentInfoById(studentId);
         if(studentId==null)
             return JsonResult.errorMsg("数据传入为空,查询失败!");
 
