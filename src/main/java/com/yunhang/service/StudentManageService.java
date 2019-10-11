@@ -61,13 +61,14 @@ public class StudentManageService{
      * 通过Id查询学生信息
      */
 
-    public List<StudentManage> queryStudentInfoById(Integer studentId){
+    public StudentManage queryStudentInfoById(Integer studentId){
 
         //判断是否传入了学生Id
         if(StringUtils.isEmpty(studentId)) return null;
         else {
             //查询所有学生信息
-            List<StudentManage> result= studentManageMapper.selectStudentInfoById(studentId);
+           StudentManage result=studentManageMapper.selectByPrimaryKey(studentId);
+            //List<StudentManage> result= studentManageMapper.selectStudentInfoById(studentId);
             return  result;
         }
     }
@@ -92,7 +93,7 @@ public class StudentManageService{
 
     public Integer updatestudent(StudentManage studentManage){
 
-            return studentManageMapper.updateByPrimaryKey(studentManage);
+            return studentManageMapper.updateByPrimaryKeySelective(studentManage);
 
     }
 
