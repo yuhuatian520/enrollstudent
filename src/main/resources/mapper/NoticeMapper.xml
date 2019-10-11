@@ -10,10 +10,11 @@
     <result column="school_id" jdbcType="INTEGER" property="schoolId" />
     <result column="sign" jdbcType="SMALLINT" property="sign" />
     <result column="mark" jdbcType="SMALLINT" property="mark" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
   </resultMap>
   <sql id="Base_Column_List">
   <!--@mbg.generated generated on Wed Sep 25 14:41:54 CST 2019.-->
-  notice_id, notice_name, notice_content, school_id, sign, mark
+  notice_id, notice_name, notice_content, school_id, sign, mark,create_time
 </sql>
 
   <select id="addNotice" resultMap="BaseResultMap">

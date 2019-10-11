@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +102,8 @@ public class NoticeService {
             for (SchoolManage s:schoolInfo) {
                 //判断由通知传入的学校ID所查到的学校是否存在   学校存在才执行插入  不存则则不能执行
                 if(JSON.toJSONString(s).equals(JSON.toJSONString(schoolManage))){
+                    //添加获取到的时间字符串添加
+                    notice.setCreateTime(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()));
                     return noticeMapper.insert(notice);
                 }
             }

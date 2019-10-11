@@ -46,5 +46,7 @@ public class Notice {
     @Column(name = "mark")
     private Short mark;
 
+    private String createTime;
+
 
 }

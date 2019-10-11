@@ -40,12 +40,10 @@ public class NoticeController {
         //接收查询到的所有公告,没有公告时,查询成功但返回的是null
         Page<NoticeDto> info = PageHelper.startPage(startPage, pageSize);
         List<NoticeDto> noticeList = noticeService.queryAllNotice();
-        return JsonResult.ok(noticeList);
-       /* List<NoticeDto> noticeinfo = noticeService.queryAllNotice();
-        if(noticeinfo.isEmpty())
-            return   JsonResult.build(ReturnCode.objectNull,"failure",null);
+        if(noticeList.isEmpty())
+            return   JsonResult.build(ReturnCode.objectNull,"无公告信息",null);
         else
-            return   JsonResult.build(ReturnCode.okayCode,"success",noticeinfo);*/
+            return JsonResult.ok(noticeList);
 
     }
 
