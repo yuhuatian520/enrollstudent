@@ -25,6 +25,12 @@ public class StudentManageController {
     @Resource
     private StudentManageService studentManageService;
 
+    /**
+     * 分页查询学生
+     * @param startPage
+     * @param pageSize
+     * @return
+     */
     @RequestMapping("selectallstudentinfo")
     public JsonResult queryAllStudentInfo(@RequestParam(required = false,defaultValue = "1") Integer startPage,
                                           @RequestParam(required = false,defaultValue = "6") Integer pageSize){
@@ -86,7 +92,7 @@ public class StudentManageController {
      * 更新学生信息
      */
     @RequestMapping(value = "updatestudentbyid",method = RequestMethod.POST)
-    public JsonResult updatestudent(StudentManage studentManage){
+    public JsonResult updatestudent(@RequestBody StudentManage studentManage){
         //判断传入的参数是否为空
         if("{}".equals(JSON.toJSONString(studentManage)))
             return   JsonResult.errorMsg("数据传入为空,添加失败!");

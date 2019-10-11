@@ -9,10 +9,7 @@ import com.yunhang.entity.StudentManage;
 import com.yunhang.service.NoticeService;
 import com.yunhang.utils.JsonResult;
 import com.yunhang.utils.ReturnCode;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -74,7 +71,7 @@ public class NoticeController {
      */
 
     @RequestMapping(value="addnotice", method = RequestMethod.POST)
-    public JsonResult addNotice(Notice notice){
+    public JsonResult addNotice(@RequestBody Notice notice){
         //判断传入参数是否为空
         if("{}".equals(JSON.toJSONString(notice)))
             return JsonResult.errorMsg("数据传入为空,查询失败!");
@@ -92,7 +89,7 @@ public class NoticeController {
      * 更新公告信息
      */
     @RequestMapping(value="updatenoticebyid", method = RequestMethod.POST)
-    public JsonResult updateNotice(Notice notice){
+    public JsonResult updateNotice(@RequestBody Notice notice){
         //判断传入参数是否为空
         if("{}".equals(JSON.toJSONString(notice)))
             return JsonResult.errorMsg("数据传入为空,更新失败!");

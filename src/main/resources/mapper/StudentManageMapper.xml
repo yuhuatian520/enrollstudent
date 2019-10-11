@@ -21,10 +21,13 @@
     student_wish, personality_id, create_time, mark
   </sql>
   <select id="selectStudentInfoByName" resultMap="BaseResultMap">
-    select sm.student_id, student_name, student_schoolname, student_age, student_sex, student_phone, student_wish, personality_id, create_time, mark from student_manage sm where student_name like CONCAT('%',#{studentName,jdbcType=VARCHAR},'%')
+    select sm.student_id, student_name, student_schoolname, student_age, student_sex, student_phone, student_wish, personality_id, create_time, mark from student_manage sm where student_name like CONCAT('%',#{studentName,jdbcType=VARCHAR},'%') and mark=4
   </select>
   <select id="selectStudentInfoById" resultMap="BaseResultMap">
-    select sm.student_id, student_name, student_schoolname, student_age, student_sex, student_phone, student_wish, personality_id, create_time, mark from student_manage sm where student_id=#{studentId,jdbcType=INTEGER}
+    select sm.student_id, student_name, student_schoolname, student_age, student_sex, student_phone, student_wish, personality_id, create_time, mark from student_manage sm where student_id=#{studentId,jdbcType=INTEGER} and mark=4
+  </select>
+  <select id="selectallStudentInfo" resultMap="BaseResultMap">
+    select sm.student_id, student_name, student_schoolname, student_age, student_sex, student_phone, student_wish, personality_id, create_time, mark from student_manage sm where  mark=4
   </select>
 
 
