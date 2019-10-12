@@ -69,16 +69,17 @@ public class NoticeService {
             List<Notice> noticeList= noticeMapper.selectAll();
             //遍历所有公告信息
             for (Notice result:noticeList){
+                    if(JSON.toJSONString(result.getNoticeId()).equals(JSON.toJSONString(notice.getNoticeId()))){
                     //查询所有学校信息
                     SchoolManage schoolInfo = schoolManageMapper.selectByPrimaryKey(result.getSchoolId());
                     //生成存储公告信息的对象noticeDto
                     NoticeDto noticeDto= new NoticeDto();
                     //将查到的公告信息存到noticeDto中
-                    BeanUtils.copyProperties(notice, noticeDto);
+                    BeanUtils.copyProperties(result, noticeDto);
                     //将查询到的学校名存到noticeDto中
                     noticeDto.setSchoolName(schoolInfo.getSchoolName());
                     return noticeDto;
-
+                    }
 
             }
 
