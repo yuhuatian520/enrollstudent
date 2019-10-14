@@ -12,9 +12,9 @@ public class EnrollstudentApplicationTests {
 
     @Test
     public void contextLoads() {
-       /* ImportParams params = new ImportParams();
+       ImportParams params = new ImportParams();
         params.setTitleRows(0);
-        params.setHeadRows(1);*/
+        params.setHeadRows(1);
         /*List<School> list = ExcelImportUtil.importExcel(
                 new File("D:\\ceshi\\大学传奇.xlsx"),
                 School.class, params);

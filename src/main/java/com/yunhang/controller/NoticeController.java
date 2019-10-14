@@ -67,16 +67,34 @@ public class NoticeController {
 
     /**
      *
-     * 添加公告信息
+     * 添加学校公告信息
      */
 
-    @RequestMapping(value="addnotice", method = RequestMethod.POST)
-    public JsonResult addNotice(@RequestBody Notice notice){
+    @RequestMapping(value="addschoolnotice", method = RequestMethod.POST)
+    public JsonResult addSchoolNotice(@RequestBody Notice notice){
         //判断传入参数是否为空
         if("{}".equals(JSON.toJSONString(notice)))
             return JsonResult.errorMsg("数据传入为空,查询失败!");
         //执行添加
-        Integer mark = noticeService.addNotice(notice);
+        Integer mark = noticeService.addSchoolNotice(notice);
+        if(mark>0)
+            return   JsonResult.build(ReturnCode.okayCode,"success",mark);
+        else
+            return   JsonResult.build(ReturnCode.dataError,"failure",mark);
+    }
+
+    /**
+     *
+     * 添加官方公告信息
+     */
+
+    @RequestMapping(value="addofficialnotice", method = RequestMethod.POST)
+    public JsonResult addofficialNotice(@RequestBody Notice notice){
+        //判断传入参数是否为空
+        if("{}".equals(JSON.toJSONString(notice)))
+            return JsonResult.errorMsg("数据传入为空,查询失败!");
+        //执行添加
+        Integer mark = noticeService.addOfficialNotice(notice);
         if(mark>0)
             return   JsonResult.build(ReturnCode.okayCode,"success",mark);
         else

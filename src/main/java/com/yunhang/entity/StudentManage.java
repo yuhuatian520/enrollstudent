@@ -70,6 +70,11 @@ public class StudentManage {
     @Column(name = "mark")
     private Short mark;
 
+    /**
+     * 学生头像
+     */
+    @Column(name = "student_avatar")
+    private String studentAvatarUrl;
 
 
 }

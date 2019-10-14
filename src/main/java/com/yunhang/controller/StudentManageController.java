@@ -10,6 +10,7 @@ import com.yunhang.utils.JsonResult;
 import com.yunhang.utils.ReturnCode;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -72,7 +73,7 @@ public class StudentManageController {
      * 添加学生
      */
     @RequestMapping(value = "addstudent",method = RequestMethod.POST)
-    public JsonResult addstudent(@RequestBody StudentManage studentManage){
+    public JsonResult addstudent(@RequestBody StudentManage studentManage, MultipartFile file){
         //判断传入的参数是否为空
 
         if("{}".equals(JSON.toJSONString(studentManage)))

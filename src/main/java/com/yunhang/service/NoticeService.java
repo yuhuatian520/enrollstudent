@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.yunhang.dto.NoticeDto;
 import com.yunhang.entity.Notice;
 import com.yunhang.entity.SchoolManage;
+import com.yunhang.entity.SchoolManagerImg;
 import com.yunhang.mapper.NoticeMapper;
 import com.yunhang.mapper.SchoolManageMapper;
+import com.yunhang.mapper.SchoolManagerImgMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,33 +29,46 @@ public class NoticeService {
     @Resource
     private NoticeMapper noticeMapper;
 
-    @Autowired
+    @Resource
     private SchoolManageMapper schoolManageMapper;
 
+    @Resource
+    private SchoolManagerImgMapper schoolManagerImgMapper;
+
     /**
-     * 查询所有公告信息
+     * 后台查询所有学校公告信息
      */
     public List<NoticeDto> queryAllNotice() {
 
         //查询所有公告
         List<Notice> result = noticeMapper.selectAll();
         //生成存储公告的对象数组result1
-        List<NoticeDto> result1 = new ArrayList<>();
+        List<NoticeDto> result1 = new ArrayList();
         for (Notice notice : result) {
+            if(notice.getSchoolId()!=null){
                 //通过公告表中的学校ID查询学校信息
-            SchoolManage schoolInfo = schoolManageMapper.selectByPrimaryKey(notice.getSchoolId());
+                SchoolManage schoolInfo = schoolManageMapper.selectByPrimaryKey(notice.getSchoolId());
                 //生成存储公告的对象noticeDto
-            NoticeDto noticeDto = new NoticeDto();
+                NoticeDto noticeDto = new NoticeDto();
                 //将查询到的公告信息存到noticeDto中
-            BeanUtils.copyProperties(notice, noticeDto);
+                BeanUtils.copyProperties(notice, noticeDto);
                 //将查询到的学校名字存入到noticeDto
-            noticeDto.setSchoolName(schoolInfo.getSchoolName());
+                noticeDto.setSchoolName(schoolInfo.getSchoolName());
+
+                //将查询到的学校图片存入noticeDto
+                noticeDto.setSchoolLogoUrl(schoolInfo.getSchoolLogo());
                 //将noticeDto存入result数组
-            result1.add(noticeDto);
+                result1.add(noticeDto);
+            }
+            else{
+                //生成存储公告的对象noticeDto
+                NoticeDto noticeDto = new NoticeDto();
+                //将查询到的公告信息存到noticeDto中
+                BeanUtils.copyProperties(notice, noticeDto);
+                result1.add(noticeDto);
 
+            }
         }
-
-
         return result1;
 
 
@@ -69,17 +84,30 @@ public class NoticeService {
             List<Notice> noticeList= noticeMapper.selectAll();
             //遍历所有公告信息
             for (Notice result:noticeList){
+                if(result.getSchoolId()!=null){
                     if(JSON.toJSONString(result.getNoticeId()).equals(JSON.toJSONString(notice.getNoticeId()))){
-                    //查询所有学校信息
-                    SchoolManage schoolInfo = schoolManageMapper.selectByPrimaryKey(result.getSchoolId());
-                    //生成存储公告信息的对象noticeDto
-                    NoticeDto noticeDto= new NoticeDto();
-                    //将查到的公告信息存到noticeDto中
-                    BeanUtils.copyProperties(result, noticeDto);
-                    //将查询到的学校名存到noticeDto中
-                    noticeDto.setSchoolName(schoolInfo.getSchoolName());
-                    return noticeDto;
+                        //查询所有学校信息
+                        SchoolManage schoolInfo = schoolManageMapper.selectByPrimaryKey(result.getSchoolId());
+                        //生成存储公告信息的对象noticeDto
+                        NoticeDto noticeDto= new NoticeDto();
+                        //将查到的公告信息存到noticeDto中
+                        BeanUtils.copyProperties(result, noticeDto);
+                        //将查询到的学校名存到noticeDto中
+                        noticeDto.setSchoolName(schoolInfo.getSchoolName());
+                        return noticeDto;
                     }
+                }
+
+                else {
+                        if(JSON.toJSONString(result.getNoticeId()).equals(JSON.toJSONString(notice.getNoticeId()))){
+                        //生成存储公告信息的对象noticeDto
+                        NoticeDto noticeDto= new NoticeDto();
+                        //将查到的公告信息存到noticeDto中
+                        BeanUtils.copyProperties(result, noticeDto);
+                        //将查询到的学校名存到noticeDto中
+                        return noticeDto;
+                        }
+                }
 
             }
 
@@ -90,9 +118,9 @@ public class NoticeService {
     }
 
     /**
-     * 添加公告信息
+     * 添加学校公告信息
      */
-    public Integer addNotice(Notice notice) {
+    public Integer addSchoolNotice(Notice notice) {
         //查询所有的学校信息
         List<SchoolManage> schoolInfo = schoolManageMapper.selectAll();
 
@@ -115,6 +143,20 @@ public class NoticeService {
 
 
     }
+    /**
+     * 添加官方公告信息
+     */
+    public Integer addOfficialNotice(Notice notice) {
+
+   if(!StringUtils.isEmpty(notice.getNoticeName())){
+       //添加获取到的时间字符串添加
+       notice.setCreateTime(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()));
+       return noticeMapper.insert(notice);
+
+    }
+        return 0;
+    }
+
 
     /**
      * 更新公告信息
