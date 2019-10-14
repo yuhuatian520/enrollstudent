@@ -73,7 +73,7 @@ public class StudentManageController {
      * 添加学生
      */
     @RequestMapping(value = "addstudent",method = RequestMethod.POST)
-    public JsonResult addstudent(@RequestBody StudentManage studentManage, MultipartFile file){
+    public JsonResult addstudent(@RequestBody StudentManage studentManage){
         //判断传入的参数是否为空
 
         if("{}".equals(JSON.toJSONString(studentManage)))
