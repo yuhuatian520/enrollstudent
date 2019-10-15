@@ -29,7 +29,7 @@ import static com.yunhang.utils.alibabautils.AliBaBaConst.iPAddressInfo;
 @Slf4j
 public class AliBaBaUploadUtil {
 
-    public Serializable uploadFileToOss(MultipartFile file) throws IOException {
+    public String uploadFileToOss(MultipartFile file) throws IOException {
         OSSClient client=new OSSClient(AliBaBaConst.endpoint,AliBaBaConst.accessKeyId,AliBaBaConst.secretAccessKey);
 
 
