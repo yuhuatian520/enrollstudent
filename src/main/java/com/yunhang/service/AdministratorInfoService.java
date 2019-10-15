@@ -18,7 +18,9 @@ public class AdministratorInfoService{
 
     @Resource
     private AdministratorInfoMapper administratorInfoMapper;
-
+    /**
+     * 超级管理员登陆
+     */
     public Boolean superAdministratorLogin(AdministratorInfo administratorInfo) {
 
         if(administratorInfo.getRole()==4){
@@ -33,7 +35,11 @@ public class AdministratorInfoService{
         return false;
     }
 
-
+    /**
+     * 普通管理员添加
+     * @param administratorInfo
+     * @return
+     */
     public int administratorAdd(AdministratorInfo administratorInfo) {
         administratorInfo.setAdministratorId(Integer.valueOf(RandomNumberGenerator.generateNumber()).toString());
         administratorInfo.setRole((short) 4);
