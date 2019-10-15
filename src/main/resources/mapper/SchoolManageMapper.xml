@@ -15,10 +15,12 @@
     <result column="scholl_phone" jdbcType="VARCHAR" property="schollPhone" />
     <result column="school_url" jdbcType="VARCHAR" property="schoolUrl" />
     <result column="school_address" jdbcType="VARCHAR" property="schoolAddress" />
+    <result column="school_logo" jdbcType="VARCHAR" property="schoolLogo" />
+    <result column="special_id" jdbcType="INTEGER" property="schoolSpecialId1" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated generated on Tue Oct 08 11:41:11 CST 2019.-->
     school_id, school_name, school_presentation, school_img, school_recommend, school_hot, 
-    school_special_id, is_attention, scholl_phone, school_url, school_address
+    school_special_id, is_attention, scholl_phone, school_url, school_address,school_logo
   </sql>
 </mapper>

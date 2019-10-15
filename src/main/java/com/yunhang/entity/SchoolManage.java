@@ -92,6 +92,18 @@ public class SchoolManage {
     @Excel(name = "地址")
     private String schoolAddress;
 
+    /**
+     * 学校LOGO
+     */
+    @Column(name = "school_logo")
+    @Excel(name = "学校logo")
+    private String schoolLogo;
+    /**
+     * 专业编号
+     */
+    @Column(name = "special_id")
+    @Excel(name = "专业编号")
+    private String schoolSpecialId1;
 
     public SchoolManage() {
     }

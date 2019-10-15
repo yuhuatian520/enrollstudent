@@ -10,4 +10,5 @@
     <result column="sign" jdbcType="SMALLINT" property="sign" />
     <result column="school_id" jdbcType="INTEGER" property="schoolId" />
   </resultMap>
+
 </mapper>

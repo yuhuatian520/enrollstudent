@@ -44,7 +44,10 @@ public class NoticeDto {
 
     //学校名称
     private String schoolName;
-
+    //公告创建时间
     private String createTime;
+    //学校图片
+    private String schoolLogoUrl;
+
 
 }
