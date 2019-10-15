@@ -8,6 +8,7 @@ import com.yunhang.entity.StudentManage;
 import com.yunhang.service.StudentManageService;
 import com.yunhang.utils.JsonResult;
 import com.yunhang.utils.ReturnCode;
+import com.yunhang.utils.alibabautils.AliBaBaUploadUtil;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,8 @@ public class StudentManageController {
 
     @Resource
     private StudentManageService studentManageService;
+
+    private final AliBaBaUploadUtil aliBaBaUploadUtil=new AliBaBaUploadUtil();
 
     /**
      * 分页查询学生
@@ -74,7 +77,6 @@ public class StudentManageController {
     @RequestMapping(value = "addstudent",method = RequestMethod.POST)
     public JsonResult addstudent(@RequestBody StudentManage studentManage){
         //判断传入的参数是否为空
-
         if("{}".equals(JSON.toJSONString(studentManage)))
             return   JsonResult.errorMsg("数据传入为空,添加失败!");
         //执行插入

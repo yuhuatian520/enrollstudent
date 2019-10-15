@@ -49,7 +49,8 @@ public class StudentManageService{
                 result.remove(s);
             }*/
             //返回mark为4的所有学生
-            return  result.parallelStream().filter(s -> s.getMark() == 4).collect(Collectors.toList());
+            //return  result.parallelStream().filter(s -> s.getMark() == 4).collect(Collectors.toList());
+            return  result;
 
 
 
@@ -67,7 +68,7 @@ public class StudentManageService{
         if(StringUtils.isEmpty(studentId)) return null;
         else {
             //查询所有学生信息
-           StudentManage result=studentManageMapper.selectByPrimaryKey(studentId);
+           StudentManage result=studentManageMapper.selectStudentInfoById(studentId);
             //List<StudentManage> result= studentManageMapper.selectStudentInfoById(studentId);
             return  result;
         }
