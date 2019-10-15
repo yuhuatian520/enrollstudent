@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.FeedbackInfoMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.FeedbackInfo">
+    <!--@mbg.generated generated on Tue Oct 15 15:27:44 CST 2019.-->
+    <!--@Table feedback_info-->
+    <id column="feedback_id" jdbcType="INTEGER" property="feedbackId" />
+    <result column="feedback_content" jdbcType="VARCHAR" property="feedbackContent" />
+    <result column="feedback_contactinfo" jdbcType="VARCHAR" property="feedbackContactinfo" />
+    <result column="cost_qq" jdbcType="VARCHAR" property="costQq" />
+    <result column="cost_phone" jdbcType="VARCHAR" property="costPhone" />
+    <result column="official_accounts" jdbcType="VARCHAR" property="officialAccounts" />
+    <result column="version_number" jdbcType="VARCHAR" property="versionNumber" />
+    <result column="software_evaluation" jdbcType="VARCHAR" property="softwareEvaluation" />
+    <result column="submission_time" jdbcType="DATE" property="submissionTime" />
+    <result column="cost_email" jdbcType="VARCHAR" property="costEmail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Tue Oct 15 15:27:44 CST 2019.-->
+    feedback_id, feedback_content, feedback_contactinfo, cost_qq, cost_phone, official_accounts, 
+    version_number, software_evaluation, submission_time, cost_email
+  </sql>
+</mapper>

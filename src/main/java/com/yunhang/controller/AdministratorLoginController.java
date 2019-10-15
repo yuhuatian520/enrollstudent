@@ -17,6 +17,9 @@ import javax.annotation.Resource;
  * @data 2019/10/15 9:01
  */
 @RestController
+/**
+ * 超级管理员登陆
+ */
 @RequestMapping("/administratormanage/")
 public class AdministratorLoginController {
     @Autowired
