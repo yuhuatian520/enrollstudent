@@ -9,6 +9,7 @@ import com.yunhang.service.StudentManageService;
 import com.yunhang.utils.JsonResult;
 import com.yunhang.utils.ReturnCode;
 import com.yunhang.utils.alibabautils.AliBaBaUploadUtil;
+import com.yunhang.utils.alibabautils.LocalUploadUtil;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,8 @@ public class StudentManageController {
     private StudentManageService studentManageService;
 
     private final AliBaBaUploadUtil aliBaBaUploadUtil=new AliBaBaUploadUtil();
+
+
 
     /**
      * 分页查询学生

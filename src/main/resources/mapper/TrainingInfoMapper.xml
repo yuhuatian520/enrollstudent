@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.TrainingInfoMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.TrainingInfo">
+    <!--@mbg.generated generated on Wed Oct 16 17:21:36 CST 2019.-->
+    <!--@Table training_info-->
+    <id column="traing_id" jdbcType="INTEGER" property="traingId" />
+    <result column="traing_name" jdbcType="VARCHAR" property="traingName" />
+    <result column="traing_content" jdbcType="VARCHAR" property="traingContent" />
+    <result column="traing_start_date" jdbcType="DATE" property="traingStartDate" />
+    <result column="traing_end_date" jdbcType="DATE" property="traingEndDate" />
+    <result column="traing_start_time" jdbcType="TIMESTAMP" property="traingStartTime" />
+    <result column="traing_end_time" jdbcType="TIMESTAMP" property="traingEndTime" />
+    <result column="traing_address" jdbcType="VARCHAR" property="traingAddress" />
+    <result column="traing_money" jdbcType="DECIMAL" property="traingMoney" />
+    <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="train_description" jdbcType="VARCHAR" property="trainDescription" />
+    <result column="train_sign" jdbcType="SMALLINT" property="trainSign" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Wed Oct 16 17:21:36 CST 2019.-->
+    traing_id, traing_name, traing_content, traing_start_date, traing_end_date, traing_start_time, 
+    traing_end_time, traing_address, traing_money, send_time, train_description, train_sign, 
+    `status`
+  </sql>
+</mapper>
