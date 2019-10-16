@@ -56,7 +56,7 @@ public class NoticeService {
                 noticeDto.setSchoolName(schoolInfo.getSchoolName());
 
                 //将查询到的学校图片存入noticeDto
-                noticeDto.setSchoolLogoUrl(schoolInfo.getSchoolLogo());
+                noticeDto.setSchoolLogo(schoolInfo.getSchoolLogo());
                 //将noticeDto存入result数组
                 result1.add(noticeDto);
             }
@@ -94,6 +94,8 @@ public class NoticeService {
                         BeanUtils.copyProperties(result, noticeDto);
                         //将查询到的学校名存到noticeDto中
                         noticeDto.setSchoolName(schoolInfo.getSchoolName());
+                        //将查询到的学校logo存到noticeDto中
+                        noticeDto.setSchoolLogo(schoolInfo.getSchoolLogo());
                         return noticeDto;
                     }
                 }
