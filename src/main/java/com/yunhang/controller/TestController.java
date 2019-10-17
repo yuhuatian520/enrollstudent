@@ -1,8 +1,10 @@
 package com.yunhang.controller;
 
+import com.yunhang.service.SchoolImgTaginfoService;
 import com.yunhang.service.SchoolManageService;
 import com.yunhang.utils.JsonResult;
 import com.yunhang.utils.alibabautils.AliBaBaUploadUtil;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -67,9 +69,18 @@ public class TestController {
      * @return
      */
     @PostMapping("importexcels")
-    public String importExcelInfos(@RequestParam("file") MultipartFile file) throws Exception {
+    public JsonResult importExcelInfos(@RequestParam("file") MultipartFile file) throws Exception {
        String mark=schoolManageService.readExcelInfo(file);
-       return mark;
+       return JsonResult.ok(mark);
+    }
+
+
+
+    @Resource
+    private SchoolImgTaginfoService schoolImgTaginfoService;
+    @GetMapping("/taginfo")
+    public Object findTagInfo(){
+        return schoolImgTaginfoService.findAll();
     }
 
 

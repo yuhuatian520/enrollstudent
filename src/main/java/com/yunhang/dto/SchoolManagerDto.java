@@ -21,6 +21,7 @@ public class SchoolManagerDto {
     //学校介绍
     private String schoolPresentation;
 
-
+    //校园代码
+    private Integer schoolCode;
 
 }

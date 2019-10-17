@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-
 /**
  * @author 杨春路
  * @data 2019/10/15 9:01
@@ -22,6 +20,7 @@ import javax.annotation.Resource;
  */
 @RequestMapping("/administratormanage/")
 public class AdministratorLoginController {
+
     @Autowired
     private AdministratorInfoService administratorInfoService;
     @RequestMapping("superadnimistratorlogin")

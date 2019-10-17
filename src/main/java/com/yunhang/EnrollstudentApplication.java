@@ -1,5 +1,6 @@
 package com.yunhang;
 
+import com.yunhang.entity.DetectionMyself;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -29,4 +30,11 @@ public class EnrollstudentApplication {
 
         return new CorsFilter(urlcfg);
     }
+    @Bean
+    public DetectionMyself createObjectInfo(){
+        return new DetectionMyself();
+    }
+
+
+
 }

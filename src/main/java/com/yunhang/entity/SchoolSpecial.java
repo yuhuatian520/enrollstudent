@@ -1,9 +1,21 @@
 package com.yunhang.entity;
 
-import java.util.Date;
-import javax.persistence.*;
 import lombok.Data;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.Date;
+
+/**
+ * \* Created with IntelliJ IDEA.
+ * \* User: 王耀
+ * \* Date: 2019/10/15
+ * \* Time: 15:04
+ * \* To change this template use File | Settings | File Templates.
+ * \* Description:
+ * \
+ */
 @Data
 @Table(name = "school_special")
 public class SchoolSpecial {
@@ -33,7 +45,7 @@ public class SchoolSpecial {
     private Short specialHot;
 
     /**
-     * 是否推荐(4,热门:8,不热门)
+     * 是否推荐(4,推荐:8,不)
      */
     @Column(name = "special_recommend")
     private Short specialRecommend;
@@ -85,6 +97,30 @@ public class SchoolSpecial {
      */
     @Column(name = "data_package_id")
     private String dataPackageId;
+
+    /**
+     * 男女比例
+     */
+    @Column(name = "special_ratio_sex")
+    private String specialRatioSex;
+
+    /**
+     * 文理比例
+     */
+    @Column(name = "special_ratio_type")
+    private String specialRatioType;
+
+    /**
+     * 专业学年度
+     */
+    @Column(name = "special_study_year")
+    private Short specialStudyYear;
+
+    /**
+     * 专业学习费用
+     */
+    @Column(name = "special_study_money")
+    private Integer specialStudyMoney;
 
     /**
      * 关联学生

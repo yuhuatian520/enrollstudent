@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.ProfessionalInfoMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.ProfessionalInfo">
+    <!--@mbg.generated generated on Mon Oct 14 15:07:06 CST 2019.-->
+    <!--@Table professional_info-->
+    <id column="professional_id" jdbcType="INTEGER" property="professionalId" />
+    <result column="professional_name" jdbcType="VARCHAR" property="professionalName" />
+    <result column="professional_content" jdbcType="VARCHAR" property="professionalContent" />
+    <result column="special_id" jdbcType="INTEGER" property="specialId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Mon Oct 14 15:07:06 CST 2019.-->
+    professional_id, professional_name, professional_content, special_id
+  </sql>
+</mapper>

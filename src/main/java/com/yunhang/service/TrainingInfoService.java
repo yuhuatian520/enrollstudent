@@ -1,13 +1,15 @@
 package com.yunhang.service;
 
+import com.yunhang.dto.TrainingInfoDto;
 import com.yunhang.entity.TrainingInfo;
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
 import com.yunhang.mapper.TrainingInfoMapper;
+import lombok.val;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 *@author 杨春路
@@ -19,25 +21,41 @@ public class TrainingInfoService{
     @Resource
     private TrainingInfoMapper trainingInfoMapper;
 
-    public List<TrainingInfo> queryAllTrainingInfo() {
-        return trainingInfoMapper.selectAll();
+    @Resource
+    private TrainingInfo trainingInfo;
+
+    @Resource
+    private TrainingInfoDto trainingInfoDto;
+
+    public TrainingInfoDto findTraingInfoBytrainId(Integer traingId) {
+        if (traingId == null || traingId < 0) {
+            return null;
+        }
+        trainingInfo.setTraingId(traingId);
+        val traingInfoobj = trainingInfoMapper.selectByPrimaryKey(trainingInfo);
+        //val traingInfoDto=new TrainingInfoDto();
+        BeanUtils.copyProperties(traingInfoobj, trainingInfoDto);
+        return trainingInfoDto;
     }
 
-    public TrainingInfo queryTrainingInfoById(Integer traingId) {
-        return trainingInfoMapper.selectByPrimaryKey(traingId);
-    }
-
-    public int addTrainingInfo(TrainingInfo trainingInfo) {
-        trainingInfo.setSendTime(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()));
-        return trainingInfoMapper.insertSelective(trainingInfo);
-    }
-
-    public int updateTrainingInfo(TrainingInfo trainingInfo) {
-        return trainingInfoMapper.updateByPrimaryKeySelective(trainingInfo);
-    }
-
-    public int deleteTrainingInfoById(TrainingInfo trainingInfo) {
-        trainingInfo.setStatus((short)8);
-        return trainingInfoMapper.updateByPrimaryKeySelective(trainingInfo);
+    /**
+     * 查询所有的数据信息
+     *
+     * @return
+     */
+    public List<TrainingInfoDto> findTraingInfoByAlls() {
+        List<TrainingInfo> trainingInfos = trainingInfoMapper.selectAll();
+        return trainingInfos.stream().map(s -> {
+            trainingInfoDto.setTraingName(s.getTraingName());
+            trainingInfoDto.setTraingAddress(s.getTraingAddress());
+            trainingInfoDto.setTraingId(s.getTraingId());
+            trainingInfoDto.setTraingStartDate(s.getTraingStartDate());
+            trainingInfoDto.setTraingEndDate(s.getTraingEndDate());
+            trainingInfoDto.setTrainSign(s.getTrainSign());
+            trainingInfoDto.setTraingMoney(s.getTraingMoney());
+            BeanUtils.copyProperties(trainingInfoDto, s);
+            //BeanUtils.copyProperties(s,trainingInfoDto);
+            return trainingInfoDto;
+        }).collect(Collectors.toList());
     }
 }

@@ -1,9 +1,13 @@
 package com.yunhang.entity;
 
+import lombok.Data;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.*;
-import lombok.Data;
 
 /**
 *@author 杨春路
@@ -36,25 +40,25 @@ public class TrainingInfo {
      * 培训日期
      */
     @Column(name = "traing_start_date")
-    private String traingStartDate;
+    private Date traingStartDate;
 
     /**
      * 结束日期
      */
     @Column(name = "traing_end_date")
-    private String traingEndDate;
+    private Date traingEndDate;
 
     /**
      * 培训时间
      */
     @Column(name = "traing_start_time")
-    private String traingStartTime;
+    private Date traingStartTime;
 
     /**
      * 培训结束时间
      */
     @Column(name = "traing_end_time")
-    private String traingEndTime;
+    private Date traingEndTime;
 
     /**
      * 培训地址
@@ -66,13 +70,13 @@ public class TrainingInfo {
      * 报名参加支付金额
      */
     @Column(name = "traing_money")
-    private String traingMoney;
+    private BigDecimal traingMoney;
 
     /**
      * 发布活动时间
      */
     @Column(name = "send_time")
-    private String sendTime;
+    private Date sendTime;
 
     /**
      * 培训描述

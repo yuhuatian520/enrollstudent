@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.AnalyzeInfoMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.AnalyzeInfo">
+    <!--@mbg.generated generated on Sat Oct 12 17:58:43 CST 2019.-->
+    <!--@Table analyze_info-->
+    <result column="analyze_id" jdbcType="VARCHAR" property="analyzeId" />
+    <result column="analyze_name" jdbcType="VARCHAR" property="analyzeName" />
+    <result column="analyze_value" jdbcType="VARCHAR" property="analyzeValue" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+  </resultMap>
+</mapper>

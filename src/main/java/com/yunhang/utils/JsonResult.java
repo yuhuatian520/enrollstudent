@@ -2,6 +2,7 @@ package com.yunhang.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Data;
 
 import java.util.List;
 
@@ -58,9 +59,7 @@ public class JsonResult {
 
     }
 
-//    public static LeeJSONResult build(Integer status, String msg) {
-//        return new LeeJSONResult(status, msg, null);
-//    }
+
 
     public JsonResult(Integer status, String msg, Object data) {
         this.status = status;
@@ -102,17 +101,7 @@ public class JsonResult {
         this.data = data;
     }
 
-    /**
-     *
-     * @Description: 将json结果集转化为LeeJSONResult对象
-     *                 需要转换的对象是一个类
-     * @param jsonData
-     * @param clazz
-     * @return
-     *
-     * @author leechenxiang
-     * @date 2016年4月22日 下午8:34:58
-     */
+
     public static JsonResult formatToPojo(String jsonData, Class<?> clazz) {
         try {
             if (clazz == null) {
@@ -134,15 +123,6 @@ public class JsonResult {
         }
     }
 
-    /**
-     *
-     * @Description: 没有object对象的转化
-     * @param json
-     * @return
-     *
-     * @author leechenxiang
-     * @date 2016年4月22日 下午8:35:21
-     */
     public static JsonResult format(String json) {
         try {
             return MAPPER.readValue(json, JsonResult.class);
@@ -152,17 +132,7 @@ public class JsonResult {
         return null;
     }
 
-    /**
-     *
-     * @Description: Object是集合转化
-     *                 需要转换的对象是一个list
-     * @param jsonData
-     * @param clazz
-     * @return
-     *
-     * @author leechenxiang
-     * @date 2016年4月22日 下午8:35:31
-     */
+
     public static JsonResult formatToList(String jsonData, Class<?> clazz) {
         try {
             JsonNode jsonNode = MAPPER.readTree(jsonData);

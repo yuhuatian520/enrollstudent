@@ -2,12 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yunhang.mapper.SchoolManageMapper">
   <resultMap id="BaseResultMap" type="com.yunhang.entity.SchoolManage">
-    <!--@mbg.generated generated on Tue Oct 08 11:41:11 CST 2019.-->
+    <!--@mbg.generated generated on Tue Oct 15 10:58:06 CST 2019.-->
     <!--@Table school_manage-->
     <id column="school_id" jdbcType="INTEGER" property="schoolId" />
     <result column="school_name" jdbcType="VARCHAR" property="schoolName" />
     <result column="school_presentation" jdbcType="VARCHAR" property="schoolPresentation" />
-    <result column="school_img" jdbcType="VARCHAR" property="schoolImg" />
+    <result column="school_attribute" jdbcType="VARCHAR" property="schoolAttribute" />
+    <result column="school_img" jdbcType="VARBINARY" property="schoolImg" />
     <result column="school_recommend" jdbcType="SMALLINT" property="schoolRecommend" />
     <result column="school_hot" jdbcType="SMALLINT" property="schoolHot" />
     <result column="school_special_id" jdbcType="INTEGER" property="schoolSpecialId" />
@@ -15,12 +16,16 @@
     <result column="scholl_phone" jdbcType="VARCHAR" property="schollPhone" />
     <result column="school_url" jdbcType="VARCHAR" property="schoolUrl" />
     <result column="school_address" jdbcType="VARCHAR" property="schoolAddress" />
+    <result column="school_code" jdbcType="VARCHAR" property="schoolCode" />
+    <result column="school_detailed" jdbcType="VARCHAR" property="schoolDetailed" />
     <result column="school_logo" jdbcType="VARCHAR" property="schoolLogo" />
-    <result column="special_id" jdbcType="INTEGER" property="schoolSpecialId1" />
+    <result column="adopt_total_people" jdbcType="INTEGER" property="adoptTotalPeople" />
+    <result column="special_id" jdbcType="INTEGER" property="specialId" />
   </resultMap>
   <sql id="Base_Column_List">
-    <!--@mbg.generated generated on Tue Oct 08 11:41:11 CST 2019.-->
-    school_id, school_name, school_presentation, school_img, school_recommend, school_hot, 
-    school_special_id, is_attention, scholl_phone, school_url, school_address,school_logo
+    <!--@mbg.generated generated on Tue Oct 15 10:58:06 CST 2019.-->
+    school_id, school_name, school_presentation, school_attribute, school_img, school_recommend, 
+    school_hot, school_special_id, is_attention, scholl_phone, school_url, school_address, 
+    school_code, school_detailed, school_logo, adopt_total_people, special_id
   </sql>
 </mapper>

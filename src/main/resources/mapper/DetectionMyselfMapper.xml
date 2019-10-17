@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.DetectionMyselfMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.DetectionMyself">
+    <!--@mbg.generated generated on Thu Oct 10 17:38:26 CST 2019.-->
+    <!--@Table detection_myself-->
+    <id column="detection_id" jdbcType="INTEGER" property="detectionId" />
+    <result column="dscore_chinese" jdbcType="SMALLINT" property="dscoreChinese" />
+    <result column="dscore_math" jdbcType="SMALLINT" property="dscoreMath" />
+    <result column="dscore_english" jdbcType="SMALLINT" property="dscoreEnglish" />
+    <result column="dscore_politecs" jdbcType="SMALLINT" property="dscorePolitecs" />
+    <result column="dscore_history" jdbcType="SMALLINT" property="dscoreHistory" />
+    <result column="dscore_geography" jdbcType="SMALLINT" property="dscoreGeography" />
+    <result column="dscore_physics" jdbcType="SMALLINT" property="dscorePhysics" />
+    <result column="dscore_chemistry" jdbcType="SMALLINT" property="dscoreChemistry" />
+    <result column="dscore_biology" jdbcType="SMALLINT" property="dscoreBiology" />
+    <result column="dscore_avg" jdbcType="INTEGER" property="dscoreAvg" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="dsocre_time" jdbcType="TIMESTAMP" property="dsocreTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Thu Oct 10 17:38:26 CST 2019.-->
+    detection_id, dscore_chinese, dscore_math, dscore_english, dscore_politecs, dscore_history, 
+    dscore_geography, dscore_physics, dscore_chemistry, dscore_biology, dscore_avg, student_id, 
+    `status`, dsocre_time
+  </sql>
+</mapper>

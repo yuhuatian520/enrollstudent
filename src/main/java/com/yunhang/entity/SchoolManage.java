@@ -10,10 +10,10 @@ import javax.persistence.Table;
 /**
  * \* Created with IntelliJ IDEA.
  * \* User: 王耀
- * \* Date: 2019/10/8
- * \* Time: 11:41
+ * \* Date: 2019/10/15
+ * \* Time: 10:58
  * \* To change this template use File | Settings | File Templates.
- * \* Description:
+ * \* Description:学校管理
  * \
  */
 @Data
@@ -37,16 +37,22 @@ public class SchoolManage {
     /**
      * 学校介绍
      */
-    @Column(name = "school_presentation")
     @Excel(name = "学校简介")
+    @Column(name = "school_presentation")
     private String schoolPresentation;
+
+    /**
+     * 学校属性
+     */
+    @Excel(name = "属性")
+    @Column(name = "school_attribute")
+    private String schoolAttribute;
 
     /**
      * 学校环境图
      */
     @Column(name = "school_img")
-    @Excel(name = "学校图片")
-    private String schoolImg;
+    private byte[] schoolImg;
 
     /**
      * 是否推荐(4,推荐:8,不推荐)
@@ -75,39 +81,52 @@ public class SchoolManage {
     /**
      * 联系方式
      */
-    @Column(name = "scholl_phone")
     @Excel(name = "联系电话")
+    @Column(name = "scholl_phone")
     private String schollPhone;
 
     /**
      * 学校网址
      */
+    @Excel(name = "网址")
     @Column(name = "school_url")
     private String schoolUrl;
 
     /**
-     * 学校地址
+     * 学校地址(暂时提供的是短地址)
      */
-    @Column(name = "school_address")
     @Excel(name = "地址")
+    @Column(name = "school_address")
     private String schoolAddress;
+
+    /**
+     * 校园代码
+     */
+    @Column(name = "school_code")
+    private String schoolCode;
+
+    /**
+     * 学校详细地址
+     */
+    @Excel(name = "所在地")
+    @Column(name = "school_detailed")
+    private String schoolDetailed;
 
     /**
      * 学校LOGO
      */
     @Column(name = "school_logo")
-    @Excel(name = "学校logo")
     private String schoolLogo;
+
     /**
-     * 专业编号
+     * 录取总人数
+     */
+    @Column(name = "adopt_total_people")
+    private Integer adoptTotalPeople;
+
+    /**
+     * 专业编号(方便查询专业的时候查询)
      */
     @Column(name = "special_id")
-    @Excel(name = "专业编号")
-    private String schoolSpecialId1;
-
-    public SchoolManage() {
-    }
-
-
-
+    private Integer specialId;
 }

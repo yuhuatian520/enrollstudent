@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.InspectInfoMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.InspectInfo">
+    <!--@mbg.generated generated on Fri Oct 11 10:18:46 CST 2019.-->
+    <!--@Table inspect_info-->
+    <id column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="question_name" jdbcType="VARCHAR" property="questionName" />
+    <result column="answer_content" jdbcType="VARCHAR" property="answerContent" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="answer_id" jdbcType="INTEGER" property="answerId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Fri Oct 11 10:18:46 CST 2019.-->
+    question_id, question_name, answer_content, create_time, `status`, student_id, answer_id
+  </sql>
+</mapper>

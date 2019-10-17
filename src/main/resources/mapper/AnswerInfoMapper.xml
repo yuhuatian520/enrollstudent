@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.AnswerInfoMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.AnswerInfo">
+    <!--@mbg.generated generated on Thu Oct 10 17:38:38 CST 2019.-->
+    <!--@Table answer_info-->
+    <id column="answer_id" jdbcType="INTEGER" property="answerId" />
+    <result column="answer_content" jdbcType="VARCHAR" property="answerContent" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Thu Oct 10 17:38:38 CST 2019.-->
+    answer_id, answer_content, question_id
+  </sql>
+</mapper>

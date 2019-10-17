@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunhang.mapper.AspirationInfoMapper">
+  <resultMap id="BaseResultMap" type="com.yunhang.entity.AspirationInfo">
+    <!--@mbg.generated generated on Sat Oct 12 17:58:38 CST 2019.-->
+    <!--@Table aspiration_info-->
+    <id column="aspiration_id" jdbcType="INTEGER" property="aspirationId" />
+    <result column="school_id" jdbcType="INTEGER" property="schoolId" />
+    <result column="school_special_id" jdbcType="INTEGER" property="schoolSpecialId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated generated on Sat Oct 12 17:58:38 CST 2019.-->
+    aspiration_id, school_id, school_special_id
+  </sql>
+</mapper>
