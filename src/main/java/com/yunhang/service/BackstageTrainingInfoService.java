@@ -23,7 +23,7 @@ public class BackstageTrainingInfoService {
      * 查询所有培训信息
      */
     public List<TrainingInfo> queryAllTrainingInfo() {
-        return trainingInfoMapper.selectAll();
+        return trainingInfoMapper.selectAllByMark();
     }
     /**
      * 查询培训信息ById

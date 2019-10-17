@@ -24,4 +24,7 @@
     traing_end_time, traing_address, traing_money, send_time, train_description, train_sign, 
     `status`
   </sql>
+    <select id="selectAllByMark" resultMap="BaseResultMap">
+       select tr.traing_id, traing_name, traing_content, traing_start_date, traing_end_date, traing_start_time, traing_end_time, traing_address, traing_money, send_time, train_description, train_sign, status from training_info tr where status=4
+    </select>
 </mapper>
