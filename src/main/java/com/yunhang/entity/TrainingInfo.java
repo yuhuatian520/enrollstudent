@@ -10,9 +10,13 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
-*@author 杨春路
-*@data 2019/10/16 17:21
-*/
+ \* Created with IntelliJ IDEA.
+ \* User: 王耀
+ \* Date: 2019/10/12
+ \* Time: 17:58
+ \* To change this template use File | Settings | File Templates.
+ \* Description:
+ \*/
 @Data
 @Table(name = "training_info")
 public class TrainingInfo {
@@ -40,25 +44,25 @@ public class TrainingInfo {
      * 培训日期
      */
     @Column(name = "traing_start_date")
-    private Date traingStartDate;
+    private String  traingStartDate;
 
     /**
      * 结束日期
      */
     @Column(name = "traing_end_date")
-    private Date traingEndDate;
+    private String traingEndDate;
 
     /**
      * 培训时间
      */
     @Column(name = "traing_start_time")
-    private Date traingStartTime;
+    private String traingStartTime;
 
     /**
      * 培训结束时间
      */
     @Column(name = "traing_end_time")
-    private Date traingEndTime;
+    private String traingEndTime;
 
     /**
      * 培训地址
@@ -70,13 +74,13 @@ public class TrainingInfo {
      * 报名参加支付金额
      */
     @Column(name = "traing_money")
-    private BigDecimal traingMoney;
+    private String traingMoney;
 
     /**
      * 发布活动时间
      */
     @Column(name = "send_time")
-    private Date sendTime;
+    private String sendTime;
 
     /**
      * 培训描述
