@@ -26,8 +26,7 @@ public class TrainingInfoController {
      * 查询所有培训信息
      */
     @RequestMapping("selectalltraininginfo")
-    public JsonResult selectAllTrainingInfo(@RequestParam(required = false,defaultValue = "1") Integer startPage,
-                                            @RequestParam(required = false,defaultValue = "6") Integer pageSize){
+    public JsonResult selectAllTrainingInfo(){
         List<TrainingInfo> trainingInfos=trainingInfoService.queryAllTrainingInfo();
         //if (trainingInfos!=null)
             return JsonResult.ok(trainingInfos);
