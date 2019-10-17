@@ -4,16 +4,19 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.yunhang.entity.SchoolManage;
+import com.yunhang.entity.SchoolManagerImg;
 import com.yunhang.service.SchoolManageService;
+import com.yunhang.service.SchoolManagerImgService;
 import com.yunhang.utils.JsonResult;
 import com.yunhang.utils.alibabautils.LocalUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.util.StringUtil;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * \* Created with IntelliJ IDEA.
@@ -34,6 +37,8 @@ public class SchoolManagerController
 
     @Autowired
     private SchoolManageService schoolManageService;
+    @Resource
+    private SchoolManagerImgService schoolManagerImgService;
     /**
      * 添加学校信息!
      * @param schoolManage
@@ -131,7 +136,15 @@ public class SchoolManagerController
 
     }
 
-
+    @PostMapping("addschoolimgs")
+    public JsonResult addSchoolImgInfo(@RequestBody List<SchoolManagerImg> schoolManagerImg){
+        CompletableFuture.runAsync(()->{
+            schoolManagerImg.parallelStream().forEach(s->{
+                schoolManagerImgService.appendSchoolImg(s);
+            });
+        });
+        return JsonResult.ok();
+    }
 
 
 

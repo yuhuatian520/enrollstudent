@@ -1,5 +1,6 @@
 package com.yunhang.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -22,18 +23,21 @@ public class ThreeSpecialKindof {
      */
     @Id
     @Column(name = "three_special_id")
+    @Excel(name = "序号")
     private Integer threeSpecialId;
 
     /**
      * 三级菜单名称
      */
     @Column(name = "three_special_name")
+    @Excel(name = "名称")
     private String threeSpecialName;
 
     /**
      * 二级菜单编号
      */
     @Column(name = "special_kind_id")
+    @Excel(name = "二级编号")
     private Integer specialKindId;
 
     /**

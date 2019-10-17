@@ -15,4 +15,5 @@ import tk.mybatis.mapper.common.Mapper;
 public interface ThreeSpecialKindofMapper extends Mapper<ThreeSpecialKindof> {
 
 
+
 }

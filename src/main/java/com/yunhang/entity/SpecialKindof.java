@@ -1,5 +1,6 @@
 package com.yunhang.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -14,12 +15,14 @@ public class SpecialKindof {
      */
     @Id
     @Column(name = "special_kind_id")
+    @Excel(name = "序号")
     private Integer specialKindId;
 
     /**
      * 种类下的专业种类名称
      */
     @Column(name = "special_kind_name")
+    @Excel(name = "专业二级类别")
     private String specialKindName;
 
     /**
@@ -31,6 +34,7 @@ public class SpecialKindof {
     /**
      * 关联第一级专业
      */
+    @Excel(name = "一级序号")
     @Column(name = "kind_id")
     private Integer kindId;
 

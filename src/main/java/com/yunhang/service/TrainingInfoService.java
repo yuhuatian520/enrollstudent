@@ -45,10 +45,10 @@ public class TrainingInfoService{
      */
     public List<TrainingInfoDto> findTraingInfoByAlls() {
         List<TrainingInfo> trainingInfos = trainingInfoMapper.selectAll();
-        return trainingInfos.stream().map(s -> {
-            System.out.println("看看数据信息:"+s);
-            BeanUtils.copyProperties(s,trainingInfoDto);
-            return trainingInfoDto;
+        return  trainingInfos.parallelStream().map(s->{
+            TrainingInfoDto tr = new TrainingInfoDto();
+                BeanUtils.copyProperties(s,tr);
+                return tr;
         }).collect(Collectors.toList());
     }
 }

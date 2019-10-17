@@ -3,14 +3,13 @@ package com.yunhang.service;
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.yunhang.dto.SchoolManagerDto;
-import com.yunhang.entity.SchoolManage;
-import com.yunhang.entity.StudentAttentionSchool;
-import com.yunhang.mapper.SchoolManageMapper;
-import com.yunhang.mapper.StudentAttentionSchoolMapper;
+import com.yunhang.entity.*;
+import com.yunhang.mapper.*;
 import com.yunhang.utils.RandomNumberGenerator;
 import com.yunhang.utils.alibabautils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import lombok.var;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -32,6 +31,16 @@ public class SchoolManageService{
     //学僧关注的学校
     @Resource
     private StudentAttentionSchoolMapper studentAttentionSchoolMapper;
+
+    @Resource
+    private SpecialKindMapper specialKindMapper;
+
+    @Resource
+    private SpecialKindofMapper specialKindofMapper;
+    @Resource
+    private ThreeSpecialKindofMapper threeSpecialKindofMapper;
+    @Resource
+    private SchoolSpecialMapper schoolSpecialMapper;
 
 
     /**
@@ -134,7 +143,7 @@ public class SchoolManageService{
     }
 
         /**
-         * 文件导入操作!
+         * 文件导入操作! 导入学校!
          * @param file
          * @return 0,1 成功与否!
          */
@@ -149,9 +158,74 @@ public class SchoolManageService{
                     schoolManageMapper.insertSelective(schoolManage);
                 }));
                 return "导入成功";
-
             }
             return "文件不合法";
         }
+
+    /**
+     * 文件导入操作! 导入!专业!
+     * @param file
+     * @return 0,1 成功与否!
+     */
+    public String readExcelInfoSpecialInfo(MultipartFile file,Integer sign) throws Exception {
+        return importExcel(file,sign);
+    }
+
+    private String importExcel(MultipartFile file,Integer sign) throws Exception {
+        if (FileUtils.checkExcelFileInfo(file)) {
+            switch (sign) {
+                case 1:
+                   var ss=setImportParams();
+                    List<SpecialKind> list = ExcelImportUtil.importExcel(file.getInputStream(),
+                            SpecialKind.class, ss);
+                    CompletableFuture.runAsync(()->list.parallelStream().forEach(schoolManage -> {
+                        specialKindMapper.insertSelective(schoolManage);
+                    }));
+                    return "导入成功";
+                case 2:
+                    var ss2=setImportParams();
+                    List<SpecialKindof> list2 = ExcelImportUtil.importExcel(file.getInputStream(),
+                            SpecialKindof.class, ss2);
+                    CompletableFuture.runAsync(()->list2.parallelStream().forEach(schoolManage -> {
+                        specialKindofMapper.insertSelective(schoolManage);
+                    }));
+                    return "导入成功";
+
+                case 3:
+                    var ss3=setImportParams();
+                    List<ThreeSpecialKindof> list3 = ExcelImportUtil.importExcel(file.getInputStream(),
+                            ThreeSpecialKindof.class, ss3);
+                    CompletableFuture.runAsync(()->list3.parallelStream().forEach(schoolManage -> {
+                        threeSpecialKindofMapper.insertSelective(schoolManage);
+                    }));
+                    return "导入成功";
+                case 4:
+                    var ss4=setImportParams();
+                    List<SchoolSpecial> list4 = ExcelImportUtil.importExcel(file.getInputStream(),
+                            SchoolSpecial.class, ss4);
+                    CompletableFuture.runAsync(()->list4.parallelStream().forEach(schoolManage -> {
+                        schoolSpecialMapper.insertSelective(schoolManage);
+                    }));
+                    return "导入成功";
+
+                default:
+                    return "导入失败!";
+            }
+
         }
+        return "文件不合法";
+    }
+
+    private  ImportParams setImportParams(){
+        val params = new ImportParams();
+        params.setTitleRows(0);
+        params.setHeadRows(1);
+        return params;
+    }
+
+
+
+
+
+}
 

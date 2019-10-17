@@ -5,8 +5,6 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * \* Created with IntelliJ IDEA.
@@ -43,25 +41,25 @@ public class TrainingInfoDto {
      * 培训日期
      */
     @Column(name = "traing_start_date")
-    private Date traingStartDate;
+    private String traingStartDate;
 
     /**
      * 结束日期
      */
     @Column(name = "traing_end_date")
-    private Date traingEndDate;
+    private String traingEndDate;
 
     /**
      * 培训时间
      */
     @Column(name = "traing_start_time")
-    private Date traingStartTime;
+    private String traingStartTime;
 
     /**
      * 培训结束时间
      */
     @Column(name = "traing_end_time")
-    private Date traingEndTime;
+    private String traingEndTime;
 
     /**
      * 培训地址
@@ -73,13 +71,13 @@ public class TrainingInfoDto {
      * 报名参加支付金额
      */
     @Column(name = "traing_money")
-    private BigDecimal traingMoney;
+    private String traingMoney;
 
     /**
      * 发布活动时间
      */
     @Column(name = "send_time")
-    private Date sendTime;
+    private String sendTime;
 
     /**
      * 报名的状态(4,ing:8,结束)
