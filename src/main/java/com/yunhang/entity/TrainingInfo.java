@@ -7,16 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
- \* Created with IntelliJ IDEA.
- \* User: 王耀
- \* Date: 2019/10/12
- \* Time: 17:58
- \* To change this template use File | Settings | File Templates.
- \* Description:
- \*/
+*@author 杨春路
+*@data 2019/10/16 17:21
+*/
 @Data
 @Table(name = "training_info")
 public class TrainingInfo {
@@ -44,7 +39,7 @@ public class TrainingInfo {
      * 培训日期
      */
     @Column(name = "traing_start_date")
-    private String  traingStartDate;
+    private String traingStartDate;
 
     /**
      * 结束日期
@@ -74,7 +69,7 @@ public class TrainingInfo {
      * 报名参加支付金额
      */
     @Column(name = "traing_money")
-    private String traingMoney;
+    private BigDecimal traingMoney;
 
     /**
      * 发布活动时间

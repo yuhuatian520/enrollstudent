@@ -46,13 +46,7 @@ public class TrainingInfoService{
     public List<TrainingInfoDto> findTraingInfoByAlls() {
         List<TrainingInfo> trainingInfos = trainingInfoMapper.selectAll();
         return trainingInfos.stream().map(s -> {
-            /*trainingInfoDto.setTraingName(s.getTraingName());
-            trainingInfoDto.setTraingAddress(s.getTraingAddress());
-            trainingInfoDto.setTraingId(s.getTraingId());
-            trainingInfoDto.setTraingStartDate(s.getTraingStartDate());
-            trainingInfoDto.setTraingEndDate(s.getTraingEndDate());
-            trainingInfoDto.setTrainSign(s.getTrainSign());
-            trainingInfoDto.setTraingMoney(s.getTraingMoney());*/
+            System.out.println("看看数据信息:"+s);
             BeanUtils.copyProperties(s,trainingInfoDto);
             return trainingInfoDto;
         }).collect(Collectors.toList());
