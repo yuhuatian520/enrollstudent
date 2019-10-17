@@ -83,6 +83,15 @@ public class TestController {
         return schoolImgTaginfoService.findAll();
     }
 
+    /**
+     * 发送短信
+     * @return
+     */
+    @PostMapping("/sendmessageinfo")
+    public JsonResult sendInforMations(){
+        
+    return null;
+    }
 
 
 

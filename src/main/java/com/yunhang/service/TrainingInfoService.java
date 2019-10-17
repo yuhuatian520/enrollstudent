@@ -54,7 +54,6 @@ public class TrainingInfoService{
             trainingInfoDto.setTrainSign(s.getTrainSign());
             trainingInfoDto.setTraingMoney(s.getTraingMoney());
             BeanUtils.copyProperties(s,trainingInfoDto);
-            //BeanUtils.copyProperties(s,trainingInfoDto);
             return trainingInfoDto;
         }).collect(Collectors.toList());
     }
