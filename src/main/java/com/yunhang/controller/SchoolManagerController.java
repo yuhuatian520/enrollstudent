@@ -6,8 +6,11 @@ import com.github.pagehelper.PageHelper;
 import com.yunhang.entity.SchoolManage;
 import com.yunhang.service.SchoolManageService;
 import com.yunhang.utils.JsonResult;
+import com.yunhang.utils.alibabautils.LocalUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.util.StringUtil;
 
 import java.util.List;
@@ -26,6 +29,8 @@ import java.util.List;
 public class SchoolManagerController
 
 {
+    private final LocalUploadUtil localUploadUtil=new LocalUploadUtil();
+
 
     @Autowired
     private SchoolManageService schoolManageService;
@@ -116,6 +121,13 @@ public class SchoolManagerController
             } else {
                 return querySchoolManagerInfoAlls(startPage, pageSize);
             }
+
+    }
+
+    @PostMapping("uploadschoollogo")
+    public JsonResult uploadSchoolLogo(MultipartFile file){
+        String mark = localUploadUtil.uploadFilesToLacal(file);
+        return JsonResult.ok(mark);
 
     }
 
