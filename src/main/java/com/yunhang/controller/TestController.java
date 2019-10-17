@@ -89,8 +89,8 @@ public class TestController {
      */
     @PostMapping("/sendmessageinfo")
     public JsonResult sendInforMations(){
-        toString();
-        toString();
+
+
     return null;
     }
 
