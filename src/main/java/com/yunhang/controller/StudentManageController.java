@@ -73,6 +73,21 @@ public class StudentManageController {
         else
             return   JsonResult.build(ReturnCode.okayCode,"success",selectStudentInfo);
     }
+
+    /**
+     *
+     * 通过手机号查询学生
+     */
+    @RequestMapping("selectstudentinfobyphone")
+    public JsonResult queryStudentInfoByPhone(String studentPhone){
+
+        StudentManage StudentInfo=studentManageService.queryStudentInfoByPhone(studentPhone);
+        if(studentPhone==null)
+            return JsonResult.errorMsg("数据传入为空,查询失败!");
+
+        else
+            return   JsonResult.build(ReturnCode.okayCode,"success",StudentInfo);
+    }
     /**
      *
      * 添加学生
@@ -87,7 +102,9 @@ public class StudentManageController {
         //判断插入是否成功
         if(mark>0)
            // return JsonResult.ok();
-        return   JsonResult.build(ReturnCode.okayCode,"success",mark);
+            return   JsonResult.build(ReturnCode.okayCode,"success",mark);
+        else if(mark==-1)
+            return JsonResult.errorMsg("手机号已存在");
         else
             return   JsonResult.build(ReturnCode.dataError,"failure",mark);
 
@@ -109,6 +126,8 @@ public class StudentManageController {
             mark=studentManageService.updatestudent(studentManage);
         if(mark>0)
             return   JsonResult.build(ReturnCode.okayCode,"success",mark);
+        if(mark==-1)
+            return JsonResult.errorMsg("手机号已存在");
 
 
             return   JsonResult.build(ReturnCode.dataError,"failure",mark);
