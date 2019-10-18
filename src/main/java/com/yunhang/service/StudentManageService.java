@@ -72,6 +72,14 @@ public class StudentManageService{
             return  result;
         }
     }
+    /**
+     *
+     * 通过手机号查询学生信息
+     */
+    public StudentManage queryStudentInfoByPhone(Integer studentPhone) {
+        StudentManage result=studentManageMapper.selectStudentInfoByPhone(studentPhone);
+        return result;
+    }
 
     /**
      *
@@ -82,7 +90,11 @@ public class StudentManageService{
             //添加获取到的时间字符串添加
             studentManage.setCreateTime(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()));
             //执行插入
-
+            List<StudentManage> studentManages=studentManageMapper.selectAll();
+        for (StudentManage manage : studentManages) {
+            if(manage.getStudentPhone().equals(studentManage.getStudentPhone()))
+                return -1;
+        }
             return studentManageMapper.insertSelective(studentManage);
     }
 
@@ -92,7 +104,11 @@ public class StudentManageService{
      */
 
     public Integer updatestudent(StudentManage studentManage){
-
+        List<StudentManage> studentManages=studentManageMapper.selectAll();
+        for (StudentManage manage : studentManages) {
+            if(manage.getStudentPhone().equals(studentManage.getStudentPhone()))
+                return -1;
+        }
             return studentManageMapper.updateByPrimaryKeySelective(studentManage);
 
     }
@@ -110,7 +126,6 @@ public class StudentManageService{
 
 
 
-
-    }
+}
 
 
