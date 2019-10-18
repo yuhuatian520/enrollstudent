@@ -103,8 +103,6 @@ public class StudentManageController {
         if(mark>0)
            // return JsonResult.ok();
             return   JsonResult.build(ReturnCode.okayCode,"success",mark);
-        else if(mark==-1)
-            return JsonResult.errorMsg("手机号已存在");
         else
             return   JsonResult.build(ReturnCode.dataError,"failure",mark);
 
@@ -126,11 +124,8 @@ public class StudentManageController {
             mark=studentManageService.updatestudent(studentManage);
         if(mark>0)
             return   JsonResult.build(ReturnCode.okayCode,"success",mark);
-        if(mark==-1)
-            return JsonResult.errorMsg("手机号已存在");
 
-
-            return   JsonResult.build(ReturnCode.dataError,"failure",mark);
+        return   JsonResult.build(ReturnCode.dataError,"failure,学生ID不存在或手机号已存在",mark);
 
     }
     /**

@@ -1,5 +1,6 @@
 package com.yunhang.service;
 
+import com.alibaba.fastjson.JSON;
 import com.yunhang.entity.StudentManage;
 import com.yunhang.mapper.StudentManageMapper;
 import org.springframework.stereotype.Service;
@@ -89,12 +90,7 @@ public class StudentManageService{
     public Integer addstudent(StudentManage studentManage){
             //添加获取到的时间字符串添加
             studentManage.setCreateTime(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()));
-            //执行插入
-            List<StudentManage> studentManages=studentManageMapper.selectAll();
-        for (StudentManage manage : studentManages) {
-            if(manage.getStudentPhone().equals(studentManage.getStudentPhone()))
-                return -1;
-        }
+
             return studentManageMapper.insertSelective(studentManage);
     }
 
@@ -104,11 +100,7 @@ public class StudentManageService{
      */
 
     public Integer updatestudent(StudentManage studentManage){
-        List<StudentManage> studentManages=studentManageMapper.selectAll();
-        for (StudentManage manage : studentManages) {
-            if(manage.getStudentPhone().equals(studentManage.getStudentPhone()))
-                return -1;
-        }
+
             return studentManageMapper.updateByPrimaryKeySelective(studentManage);
 
     }
