@@ -30,6 +30,9 @@ public class BackstageTrainingInfoService {
      *
      */
     public TrainingInfo queryTrainingInfoById(Integer traingId) {
+        TrainingInfo trainingInfo=trainingInfoMapper.selectByPrimaryKey(traingId);
+        if(trainingInfo.getStatus()==8)
+            return null;
         return trainingInfoMapper.selectByPrimaryKey(traingId);
     }
     /**
