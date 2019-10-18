@@ -1,9 +1,10 @@
 package com.yunhang.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.yunhang.entity.*;
+import com.yunhang.entity.SchoolSpecial;
+import com.yunhang.entity.SpecialKind;
+import com.yunhang.entity.SpecialKindof;
+import com.yunhang.entity.ThreeSpecialKindof;
 import com.yunhang.service.SchoolSpecialService;
 import com.yunhang.service.SpecialKindService;
 import com.yunhang.service.SpecialKindofService;
@@ -55,8 +56,7 @@ public class SpecialKindOfController {
      * @return
      */
     @GetMapping("threespecialList")
-    public JsonResult threeSpecialListInfos(ThreeSpecialKindof threeSpecialKindof,@RequestParam(required = false) Integer startPage,@RequestParam(required = false,defaultValue = "6") Integer pageSize){
-        Page<ThreeSpecialKindof> info = PageHelper.startPage(startPage, pageSize);
+    public JsonResult threeSpecialListInfos(ThreeSpecialKindof threeSpecialKindof){
         return JsonResult.build(ReturnCode.okayCode,"成功",schoolSpecialService.querySchoolSpecialInfoBySpecialKindOfId(threeSpecialKindof));
     }
 
