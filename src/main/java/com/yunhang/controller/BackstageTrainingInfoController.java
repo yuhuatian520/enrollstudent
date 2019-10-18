@@ -59,6 +59,7 @@ public class BackstageTrainingInfoController {
         else
             return JsonResult.errorMsg("添加失败");
     }
+
     /**
      * 更新培训信息
      */

@@ -76,5 +76,24 @@ public class StudentManage {
     @Column(name = "student_avatar")
     private String studentAvatarUrl;
 
+    /**
+     * VIP开通时间
+     */
+    @Column(name = "vip_startime")
+    private String vipStartTime;
+
+    /**
+     * VIP结束时间
+     */
+    @Column(name = "vip_endtime")
+    private String vipEndTime;
+
+    /**
+     * 是否VIP(4,是；8，不是)
+     */
+    @Column(name = "vip_status")
+    private Short vipStatus;
+
+
 
 }
