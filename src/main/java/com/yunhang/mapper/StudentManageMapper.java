@@ -17,5 +17,5 @@ public interface StudentManageMapper extends Mapper<StudentManage> {
     List<StudentManage> selectallStudentInfo();
 
 
-    StudentManage selectStudentInfoByPhone(Integer studentPhone);
+    StudentManage selectStudentInfoByPhone(String studentPhone);
 }

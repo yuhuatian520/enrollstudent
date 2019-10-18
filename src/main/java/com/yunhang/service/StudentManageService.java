@@ -76,7 +76,7 @@ public class StudentManageService{
      *
      * 通过手机号查询学生信息
      */
-    public StudentManage queryStudentInfoByPhone(Integer studentPhone) {
+    public StudentManage queryStudentInfoByPhone(String studentPhone) {
         StudentManage result=studentManageMapper.selectStudentInfoByPhone(studentPhone);
         return result;
     }

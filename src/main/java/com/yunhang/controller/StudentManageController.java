@@ -79,14 +79,14 @@ public class StudentManageController {
      * 通过手机号查询学生
      */
     @RequestMapping("selectstudentinfobyphone")
-    public JsonResult queryStudentInfoByPhone(Integer studentPhone){
+    public JsonResult queryStudentInfoByPhone(String studentPhone){
 
-        StudentManage selectStudentInfo=studentManageService.queryStudentInfoByPhone(studentPhone);
+        StudentManage StudentInfo=studentManageService.queryStudentInfoByPhone(studentPhone);
         if(studentPhone==null)
             return JsonResult.errorMsg("数据传入为空,查询失败!");
 
         else
-            return   JsonResult.build(ReturnCode.okayCode,"success",selectStudentInfo);
+            return   JsonResult.build(ReturnCode.okayCode,"success",StudentInfo);
     }
     /**
      *
