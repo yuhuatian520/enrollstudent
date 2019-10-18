@@ -55,7 +55,7 @@ public class SpecialKindOfController {
      * @return
      */
     @GetMapping("threespecialList")
-    public JsonResult threeSpecialListInfos(ThreeSpecialKindof threeSpecialKindof,@RequestParam(required = false) Integer startPage,@RequestParam(required = false,value = "6") Integer pageSize){
+    public JsonResult threeSpecialListInfos(ThreeSpecialKindof threeSpecialKindof,@RequestParam(required = false) Integer startPage,@RequestParam(required = false,defaultValue = "6") Integer pageSize){
         Page<ThreeSpecialKindof> info = PageHelper.startPage(startPage, pageSize);
         return JsonResult.build(ReturnCode.okayCode,"成功",schoolSpecialService.querySchoolSpecialInfoBySpecialKindOfId(threeSpecialKindof));
     }
