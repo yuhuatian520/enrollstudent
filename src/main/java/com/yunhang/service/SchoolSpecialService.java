@@ -1,5 +1,6 @@
 package com.yunhang.service;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.yunhang.dto.SchoolSpecialDto;
 import com.yunhang.dto.vo.SchoolManagerVo;
@@ -50,6 +51,8 @@ public class SchoolSpecialService{
     //中间表 对接的专业编号和学校编号
     @Resource
     private SchoolinfoAndSpecialinfo schoolinfoAndSpecialinfo;
+
+
     /**
      * 专业编号!
      * @param specialId
@@ -165,6 +168,27 @@ public class SchoolSpecialService{
         return specialVo2;
     }
 
-
-
+    /**
+     * 修改专业信息数据
+     * @param sign  表示几级专业
+     * @param data 专业内容
+     */
+    public Integer updateSpecialInfo(Integer sign, String data) {
+       switch (sign){
+           case 1:
+               SpecialKind special1 = JSON.parseObject(data, com.yunhang.entity.SpecialKind.class);
+               int mark = specialKindMapper.updateByPrimaryKeySelective(special1);
+               if (mark>0)return 1;
+               else return 0;
+           case 2:
+               specialKindofMapper.updateByPrimaryKeySelective(JSON.parseObject(data, SpecialKindof.class));
+               return 1;
+           case 3:
+               threeSpecialKindofMapper.updateByPrimaryKeySelective(JSON.parseObject(data, ThreeSpecialKindof.class));
+               return 1;
+           default:
+               schoolSpecialMapper.updateByPrimaryKeySelective(JSON.parseObject(data, SchoolSpecial.class));
+               return 1;
+       }
+    }
 }

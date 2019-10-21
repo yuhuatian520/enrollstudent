@@ -63,7 +63,6 @@ public class AliBaBaUploadUtil {
                    //fileUrl = fileHost + (UUIDUtils.getUuid32() + file.getName().substring(file.getName().lastIndexOf("."),file.getName().length()));
                    // 上传文件
                    PutObjectResult result = client.putObject(new PutObjectRequest(bucketName, newFileName,new FileInputStream(new File(originalFilename))));
-                   System.out.println("kankan-"+result);
                    // 设置权限(公开读)
                    client.setBucketAcl(bucketName, CannedAccessControlList.PublicRead);
                    if (result != null) {

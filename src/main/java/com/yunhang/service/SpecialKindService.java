@@ -13,6 +13,7 @@ import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -36,7 +37,9 @@ public class SpecialKindService {
      * @return
      */
     public List<SpecialKind> querySpecialKindListInfo() {
-        return specialKindMapper.selectAll();
+        val example = new Example(SpecialKind.class);
+            example.setOrderByClause("kind_id ASC");
+            return specialKindMapper.selectByExample(example);
     }
 
     /**

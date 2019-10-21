@@ -9,12 +9,15 @@ import com.yunhang.service.SchoolManageService;
 import com.yunhang.service.SchoolManagerImgService;
 import com.yunhang.utils.JsonResult;
 import com.yunhang.utils.alibabautils.LocalUploadUtil;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.util.StringUtil;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -32,9 +35,13 @@ import java.util.concurrent.CompletableFuture;
 public class SchoolManagerController
 
 {
+
+    @Resource
+    private TestController testController;
     private final LocalUploadUtil localUploadUtil=new LocalUploadUtil();
 
-
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
     @Autowired
     private SchoolManageService schoolManageService;
     @Resource
@@ -136,13 +143,28 @@ public class SchoolManagerController
 
     }
 
-    @PostMapping("addschoolimgs")
-    public JsonResult addSchoolImgInfo(@RequestBody List<SchoolManagerImg> schoolManagerImg){
+
+
+    /**
+     * 学校图片上传!
+     * @param
+     * @return
+     */
+    @PostMapping("addschoolimgs2")
+    public JsonResult addSchoolImgInfo2(List<MultipartFile> files,Short sign){
         CompletableFuture.runAsync(()->{
-            schoolManagerImg.parallelStream().forEach(s->{
-                schoolManagerImgService.appendSchoolImg(s);
-            });
-        });
+            try {
+                List imgs = testController.uploadFileInfoToAliOssAlls(files);
+                imgs.parallelStream().forEach(s->{
+                    val img = new SchoolManagerImg();
+                        img.setStudentImgUrl(s.toString());
+                        img.setSign(sign);
+                        schoolManagerImgService.appendSchoolImg(img);
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).join();
         return JsonResult.ok();
     }
 

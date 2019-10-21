@@ -67,13 +67,14 @@ public class TestController {
     public List uploadFileInfoToAliOssAlls(List<MultipartFile> files) throws IOException {
       return   files.parallelStream().map(s-> {
                   try {
-                      return JsonResult.ok(aliBaBaUploadUtil.uploadFileToOss(s));
+                      return aliBaBaUploadUtil.uploadFileToOss(s);
                   } catch (IOException e) {
                       e.printStackTrace();
                   }
                   return null;
               }
       ).collect(Collectors.toList());
+
     }
 
     /**

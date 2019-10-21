@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.yunhang.entity.SpecialKind">
     <!--@mbg.generated generated on Wed Sep 25 18:18:50 CST 2019.-->
     <!--@Table special_kind-->
-    <result column="kind_id" jdbcType="INTEGER" property="kindId" />
+    <id column="kind_id" jdbcType="INTEGER" property="kindId" />
     <result column="kind_name" jdbcType="VARCHAR" property="kindName" />
     <result column="special_kind_id" jdbcType="INTEGER" property="specialKindId" />
   </resultMap>

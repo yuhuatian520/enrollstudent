@@ -41,4 +41,10 @@ public class AdministratorLoginController {
             return JsonResult.build(ReturnCode.dataError,"插入失败",mark);
 
     }
+
+
+
+
+
+
 }

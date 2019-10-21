@@ -145,9 +145,16 @@ public class SpecialKindOfController {
 
     }
 
-
-
-
+    /** sign:几级专业
+     * 专业修改 即一级
+     * @return
+     */
+    @PutMapping("updatespecialinfo1/{sign}")
+    public JsonResult updateSpecialInfo1(@PathVariable Integer sign,String data){
+       int mark=schoolSpecialService.updateSpecialInfo(sign,data);
+       if (mark>0)return JsonResult.ok();
+       else return JsonResult.errorMsg("修改失败!");
+    }
 
 
 

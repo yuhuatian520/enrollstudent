@@ -4,6 +4,7 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Data;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class SpecialKind {
     /**
      * 专业种类编号
      */
+    @Id
     @Excel(name = "序号")
     @Column(name = "kind_id")
     private Integer kindId;
