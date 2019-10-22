@@ -1,20 +1,18 @@
 package com.yunhang.utils.alibabautils;
 
 
-import com.aliyun.oss.ClientException;
-import com.aliyun.oss.OSSClient;
-import com.aliyun.oss.OSSException;
-import com.aliyun.oss.model.CannedAccessControlList;
-import com.aliyun.oss.model.CreateBucketRequest;
+import com.aliyun.oss.OSS;
+import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.PutObjectRequest;
-import com.aliyun.oss.model.PutObjectResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.UUID;
 
-import static com.yunhang.utils.alibabautils.AliBaBaConst.bucketName;
 import static com.yunhang.utils.alibabautils.AliBaBaConst.iPAddressInfo;
 
 /**
@@ -30,8 +28,6 @@ import static com.yunhang.utils.alibabautils.AliBaBaConst.iPAddressInfo;
 public class AliBaBaUploadUtil {
 
     public String uploadFileToOss(MultipartFile file) throws IOException {
-        OSSClient client=new OSSClient(AliBaBaConst.endpoint,AliBaBaConst.accessKeyId,AliBaBaConst.secretAccessKey);
-
 
         if (file != null) {
             // 判断上传图片类型是否合法
@@ -49,31 +45,16 @@ public class AliBaBaUploadUtil {
             String contentType = originalFilename.indexOf(".") != -1 ? originalFilename.substring(originalFilename.lastIndexOf(".") + 1, originalFilename.length()) : null;
             // 生成新的文件名 （取当前时间戳和六位随机数拼接成文件名）
             String newFileName =UUID.randomUUID().toString().trim().replace("-","") + "." + contentType;
-               try {
-                   String fileUrl = "";
-
-                   // 判断容器是否存在,不存在就创建
-                   if (!client.doesBucketExist(bucketName)) {
-                       client.createBucket(bucketName);
-                       CreateBucketRequest createBucketRequest = new CreateBucketRequest(bucketName);
-                       createBucketRequest.setCannedACL(CannedAccessControlList.PublicRead);
-                       client.createBucket(createBucketRequest);
-                   }
-                   // 设置文件路径和名称
-                   //fileUrl = fileHost + (UUIDUtils.getUuid32() + file.getName().substring(file.getName().lastIndexOf("."),file.getName().length()));
-                   // 上传文件
-                   PutObjectResult result = client.putObject(new PutObjectRequest(bucketName, newFileName,new FileInputStream(new File(originalFilename))));
-                   // 设置权限(公开读)
-                   client.setBucketAcl(bucketName, CannedAccessControlList.PublicRead);
-                   if (result != null) {
-                       log.info("------OSS文件上传成功------" + fileUrl);
-                   }
-               }catch (OSSException oe){
-                   log.error(oe.getMessage());
-               }catch (ClientException ce){
-                   log.error(ce.getErrorMessage());
-               }finally{
-                   client.shutdown();
+               // 创建OSSClient实例。
+               OSS ossClient = new OSSClientBuilder().build(AliBaBaConst.endpoint,AliBaBaConst.accessKeyId,AliBaBaConst.secretAccessKey);
+               PutObjectRequest putObjectRequest = new PutObjectRequest(AliBaBaConst.bucketName, newFileName,newFile);
+               ossClient.putObject(putObjectRequest);
+                    // 关闭OSSClient。
+               ossClient.shutdown();
+               if (newFile.exists()){
+                   newFile.delete();
+               }else {
+                   log.info("文件不存在!");
                }
                return iPAddressInfo+newFileName;
            }

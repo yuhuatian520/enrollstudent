@@ -151,7 +151,7 @@ public class SchoolManagerController
      * @return
      */
     @PostMapping("addschoolimgs2")
-    public JsonResult addSchoolImgInfo2(List<MultipartFile> files,Short sign){
+    public JsonResult addSchoolImgInfo2(List<MultipartFile> files,Short sign,Integer schoolId){
         CompletableFuture.runAsync(()->{
             try {
                 List imgs = testController.uploadFileInfoToAliOssAlls(files);
@@ -159,12 +159,13 @@ public class SchoolManagerController
                     val img = new SchoolManagerImg();
                         img.setStudentImgUrl(s.toString());
                         img.setSign(sign);
+                        img.setSchoolId(schoolId);
                         schoolManagerImgService.appendSchoolImg(img);
                 });
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).join();
+        });
         return JsonResult.ok();
     }
 

@@ -20,6 +20,8 @@ public interface AliBaBaConst {
     String addressUrl="oss-cn-chengdu.aliyuncs.com";
     //暂时名称!
     String bucketName="enrollstudent";
+    //暂时名称!
+    String bucketName2="teststudent";
     //上传的域名
     String iPAddressInfo="http://stu.yhjygs.com/";
 
