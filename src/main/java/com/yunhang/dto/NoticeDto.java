@@ -26,7 +26,7 @@ public class NoticeDto {
     @Id
     @Column(name = "notice_id")
     @Excel(name = "通知编号")
-    private String noticeId;
+    private Integer noticeId;
 
     /**
      * 公告名称
