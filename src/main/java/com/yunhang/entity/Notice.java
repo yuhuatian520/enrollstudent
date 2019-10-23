@@ -3,18 +3,29 @@ package com.yunhang.entity;
 import lombok.Data;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Data
+/**
+ * \* Created with IntelliJ IDEA.
+ * \* User: 王耀
+ * \* Date: 2019/10/23
+ * \* Time: 10:47
+ * \* To change this template use File | Settings | File Templates.
+ * \* Description:
+ * \
+ */
 @Table(name = "notice")
+@Data
 public class Notice {
     /**
      * 公告编号
      */
     @Id
     @Column(name = "notice_id")
-    private String noticeId;
+    @GeneratedValue(generator = "JDBC")
+    private Integer noticeId;
 
     /**
      * 公告名称
@@ -46,6 +57,10 @@ public class Notice {
     @Column(name = "mark")
     private Short mark;
 
+    /**
+     * 公告添加时间
+     */
+    @Column(name = "create_time")
     private String createTime;
 
 

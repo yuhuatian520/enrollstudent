@@ -17,22 +17,26 @@ public class EnrollstudentApplication {
         SpringApplication.run(EnrollstudentApplication.class, args);
     }
 
-    @Bean
-    public CorsFilter corsFilter () {
-        CorsConfiguration cfg = new CorsConfiguration();
-        cfg.addAllowedHeader("*");
-        cfg.addAllowedMethod("*");
-        cfg.addAllowedOrigin("*");
-//		cfg.addExposedHeader("*");
-        cfg.setAllowCredentials(true); // //是否发送Cookie信息
-        UrlBasedCorsConfigurationSource urlcfg = new UrlBasedCorsConfigurationSource();
-        urlcfg.registerCorsConfiguration("/**", cfg);
 
-        return new CorsFilter(urlcfg);
-    }
     @Bean
     public DetectionMyself createObjectInfo(){
         return new DetectionMyself();
+    }
+
+
+    private CorsConfiguration buildConfig() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedOrigin("*"); // 1允许任何域名使用
+        corsConfiguration.addAllowedHeader("*"); // 2允许任何头
+        corsConfiguration.addAllowedMethod("*"); // 3允许任何方法（post、get等）
+        return corsConfiguration;
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", buildConfig()); // 4
+        return new CorsFilter(source);
     }
 
 

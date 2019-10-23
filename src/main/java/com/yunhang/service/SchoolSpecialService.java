@@ -184,8 +184,9 @@ public class SchoolSpecialService{
                specialKindofMapper.updateByPrimaryKeySelective(JSON.parseObject(data, SpecialKindof.class));
                return 1;
            case 3:
-               threeSpecialKindofMapper.updateByPrimaryKeySelective(JSON.parseObject(data, ThreeSpecialKindof.class));
-               return 1;
+               int mark3 = threeSpecialKindofMapper.updateByPrimaryKeySelective(JSON.parseObject(data, ThreeSpecialKindof.class));
+               if (mark3>0)return 1;
+              else return 1;
            default:
                schoolSpecialMapper.updateByPrimaryKeySelective(JSON.parseObject(data, SchoolSpecial.class));
                return 1;

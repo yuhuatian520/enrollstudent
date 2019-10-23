@@ -165,7 +165,7 @@ public class SchoolManagerController
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+        }).join();
         return JsonResult.ok();
     }
 
