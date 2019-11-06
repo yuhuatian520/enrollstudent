@@ -6,6 +6,7 @@ import com.yunhang.entity.AdministratorInfo;
 import com.yunhang.service.AdministratorInfoService;
 import com.yunhang.tokenutils.TokenUtil;
 import com.yunhang.utils.JsonResult;
+import com.yunhang.utils.MD5Utils;
 import com.yunhang.utils.ReturnCode;
 import lombok.val;
 import lombok.var;
@@ -32,6 +33,7 @@ public class AdministratorLoginController {
     private AdministratorInfoService administratorInfoService;
     @RequestMapping("superadnimistratorlogin")
     public JsonResult adnimistratorLogin(@RequestBody AdministratorInfo administratorInfo){
+        administratorInfo.setAdministratorPassword(MD5Utils.createMd5(administratorInfo.getAdministratorPassword()));
         Boolean b=administratorInfoService.superAdministratorLogin(administratorInfo);
         if(b)
             return JsonResult.build(ReturnCode.okayCode,"超级管理员登陆成功!",b);
@@ -41,6 +43,7 @@ public class AdministratorLoginController {
 
     @PostMapping("addadministrator")
     public JsonResult administratorAdd(@RequestBody AdministratorInfo administratorInfo){
+        administratorInfo.setAdministratorPassword(MD5Utils.createMd5(administratorInfo.getAdministratorPassword()));
         int mark=administratorInfoService.administratorAdd(administratorInfo);
         if(mark>0)
             return JsonResult.ok(administratorInfoService.administratorAdd(administratorInfo));
