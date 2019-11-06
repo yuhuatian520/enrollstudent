@@ -1,14 +1,19 @@
 package com.yunhang.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.yunhang.annotation.UserLoginToken;
 import com.yunhang.entity.AdministratorInfo;
 import com.yunhang.service.AdministratorInfoService;
+import com.yunhang.tokenutils.TokenUtil;
 import com.yunhang.utils.JsonResult;
 import com.yunhang.utils.ReturnCode;
+import lombok.val;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @author 杨春路
@@ -20,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RequestMapping("/administratormanage/")
 public class AdministratorLoginController {
+    @Resource
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private AdministratorInfoService administratorInfoService;
@@ -42,8 +49,39 @@ public class AdministratorLoginController {
 
     }
 
+    @PostMapping("login")
+    public JsonResult loginTest(@RequestBody AdministratorInfo administratorInfo){
+       val admin=administratorInfoService.findAdministratorInfoByAdminame(administratorInfo.getAdministratorName());
+        if (admin==null){
+            return JsonResult.errorMsg("用户不存在!");
+        }else{
+
+            if (!administratorInfo.getAdministratorPassword().equals(admin.getAdministratorPassword())){
+            return JsonResult.errorMsg("密码错误!");
+        }else {
+                var token = TokenUtil.getToken(admin);
+                   val json=new JSONObject();
+                   json.put("token",token);
+                   json.put("admin",admin);
+                redisTemplate.opsForValue().set("token",token);
+                System.out.println(redisTemplate.opsForValue().get("token"));
+                return JsonResult.ok(json);
+            }
+        }
+    }
 
 
+
+    @UserLoginToken
+    @GetMapping("getMessage")
+    public String getMessage(){
+        Object token = redisTemplate.opsForValue().get("token");
+        if ("".equals(token.toString())){
+            System.out.println(token.toString());
+            return "登录过期!";
+        }
+        return "你已通过验证";
+    }
 
 
 

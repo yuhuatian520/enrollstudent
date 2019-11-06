@@ -13,4 +13,8 @@ import java.util.List;
 public interface AdministratorInfoMapper extends Mapper<AdministratorInfo> {
 
     List<AdministratorInfo> selectByRole(Short role);
+
+    AdministratorInfo selectByName(String administratorName);
+
+
 }

@@ -22,8 +22,12 @@ public interface AliBaBaConst {
     String bucketName="enrollstudent";
     //暂时名称!
     String bucketName2="teststudent";
+    //暂时存放协议
+    String bucketNameProtocol="protocolinfomation";
     //上传的域名
     String iPAddressInfo="http://stu.yhjygs.com/";
+    //上传的协议
+    String iPAddressInfoapi="http://api.yhjygs.com/";
 
 
 }

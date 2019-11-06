@@ -20,4 +20,7 @@
   <select id="selectByRole" resultMap="BaseResultMap">
     select a.administrator_id, administrator_name, administrator_password, status, create_time, login_time, role from administrator_info a where role=#{role}
   </select>
+    <select id="selectByName" resultMap="BaseResultMap">
+      select * from administrator_info where administrator_name=#{administratorName}
+    </select>
 </mapper>

@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.List;
 
 /**
  * \* Created with IntelliJ IDEA.
@@ -112,11 +113,13 @@ public class SchoolManage {
     @Column(name = "school_detailed")
     private String schoolDetailed;
 
+
     /**
      * 学校LOGO
      */
     @Column(name = "school_logo")
     private String schoolLogo;
+
 
     /**
      * 录取总人数
@@ -129,4 +132,9 @@ public class SchoolManage {
      */
     @Column(name = "special_id")
     private Integer specialId;
+
+    private List<SchoolManagerImg> schoolManagerImgLists;
+
+
+
 }

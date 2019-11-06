@@ -2,7 +2,6 @@ package com.yunhang.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.yunhang.dto.NoticeDto;
 import com.yunhang.entity.TrainingInfo;
 import com.yunhang.service.BackstageTrainingInfoService;
 import com.yunhang.utils.JsonResult;
@@ -27,7 +26,7 @@ public class BackstageTrainingInfoController {
      */
     @RequestMapping("selectalltraininginfo")
     public JsonResult selectAllTrainingInfo(@RequestParam(required = false,defaultValue = "1") Integer startPage,
-                                            @RequestParam(required = false,defaultValue = "6") Integer pageSize){
+                                            @RequestParam(required = false,defaultValue = "20") Integer pageSize){
         Page<TrainingInfo> info = PageHelper.startPage(startPage, pageSize);
         List<TrainingInfo> trainingInfos=backstageTrainingInfoService.queryAllTrainingInfo();
         //if (trainingInfos!=null)

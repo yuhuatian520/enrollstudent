@@ -1,6 +1,8 @@
 package com.yunhang.APPcontroller;
 
+import com.yunhang.dto.vo.SchoolManagerRecommendVo;
 import com.yunhang.entity.SchoolManagerImg;
+import com.yunhang.service.SchoolManageService;
 import com.yunhang.service.SchoolManagerImgService;
 import com.yunhang.service.SchoolSpecialService;
 import com.yunhang.utils.JsonResult;
@@ -8,7 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -34,6 +39,8 @@ public class AppSchoolController {
     private SchoolManagerImgService schoolManagerImgService;
     @Resource
     private SchoolSpecialService schoolSpecialService;
+    @Resource
+    private SchoolManageService schoolManageService;
 
     /**
      * 根据学校的编号来查询学校的图片信息   sign :1 环境图  2:文化图
@@ -71,6 +78,30 @@ public class AppSchoolController {
     public JsonResult findSchoolManagerInfoSpecialInfos(@PathVariable("schoolId") Integer schoolId){
         return JsonResult.ok(schoolManagerImgService.findSchoolSpecialInfos(schoolId));
     }
+
+    /**
+     * 通过推荐查询院校信息和专业
+     * @return
+     */
+    @GetMapping("recommendschoolinfo/{sign}")
+    public JsonResult findSchoolManagerInfoByRecommend(@PathVariable("sign") Integer sign) {
+        List<SchoolManagerRecommendVo> recommendSchool = schoolManageService.findSchoolManagerByRecommend(sign);
+        if (recommendSchool==null)return JsonResult.errorMsg("暂时无推荐");
+       return JsonResult.ok(recommendSchool);
+    }
+
+    /**
+     * 查询学校信息和地址
+     * @param
+     * @return
+     */
+    @GetMapping("findschooladdress")
+    public Mono<JsonResult> querySchoolInfoAddress(){
+        List slist = schoolManageService.findSchoolManageAddressInfos();
+        if (slist==null)return Mono.just(JsonResult.errorMsg("暂时无数据"));
+       return   Mono.just(JsonResult.ok(slist));
+    }
+
 
 
 

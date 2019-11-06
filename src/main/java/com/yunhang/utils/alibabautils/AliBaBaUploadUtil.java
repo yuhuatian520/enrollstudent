@@ -45,6 +45,10 @@ public class AliBaBaUploadUtil {
                String contentType = originalFilename.indexOf(".") != -1 ? originalFilename.substring(originalFilename.lastIndexOf(".") + 1, originalFilename.length()) : null;
                // 生成新的文件名 （取当前时间戳和六位随机数拼接成文件名）
                String newFileName = UUID.randomUUID().toString().trim().replace("-", "") + "." + contentType;
+              //var newFileName="7091682735704fc09e731b30da8871fe.html";
+               //服务条款
+               //var newFileName="f85ed1c61a7a49ac82ac6e44f979992e.html";
+
                CompletableFuture.runAsync(()-> {
                    // 创建OSSClient实例。
                    OSS ossClient = new OSSClientBuilder().build(AliBaBaConst.endpoint, AliBaBaConst.accessKeyId, AliBaBaConst.secretAccessKey);
@@ -62,8 +66,9 @@ public class AliBaBaUploadUtil {
            }
         }
         return "";
-
     }
+
+
 }
 
 

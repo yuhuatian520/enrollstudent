@@ -1,7 +1,6 @@
 package com.yunhang.service;
 
 import com.alibaba.fastjson.JSON;
-import com.google.common.collect.Lists;
 import com.yunhang.dto.SchoolSpecialDto;
 import com.yunhang.dto.vo.SchoolManagerVo;
 import com.yunhang.dto.vo.SchoolSpecialVo;
@@ -15,9 +14,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.LinkedList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @Service
@@ -128,7 +128,7 @@ public class SchoolSpecialService{
             school.setSpecialName(schoolSpecial1.getSpecialName());
             BeanUtils.copyProperties(schoolSpecial1, school);
             return school;
-        }).collect(Collectors.toList());
+        }).collect(toList());
 
     }
 
@@ -158,11 +158,12 @@ public class SchoolSpecialService{
             List<SchoolManage> schoolManages = schoolManageMapper.select(schoolManage);
             specialVo2.setSchoolNames(schoolManages.parallelStream().map(schoolManage1 -> {
                 val schoolManagers=new SchoolManagerVo();
-                LinkedList list = Lists.newLinkedList();
+                //LinkedList list = Lists.newLinkedList();
                 schoolManagers.setSchoolName(schoolManage1.getSchoolName());
-                list.add(schoolManagers);
-                return list;
-            }).collect(Collectors.toList()));
+                //list.add(schoolManagers);
+                BeanUtils.copyProperties(schoolManage1,schoolManagers);
+                return schoolManagers;
+            }).collect(toList()));
             BeanUtils.copyProperties(specialInfos,specialVo2);
         });
         return specialVo2;
@@ -191,5 +192,17 @@ public class SchoolSpecialService{
                schoolSpecialMapper.updateByPrimaryKeySelective(JSON.parseObject(data, SchoolSpecial.class));
                return 1;
        }
+    }
+
+    public List findSpecialInfoByRecommonded() {
+        List<SchoolSpecialVo> slist = schoolSpecialMapper.selectAll().parallelStream()
+                .sorted(Comparator.comparing(SchoolSpecial::getSpecialId))
+                .filter(x -> x.getSpecialRecommend() == 4).map(y -> {
+                    val s1 = new SchoolSpecialVo();
+                    BeanUtils.copyProperties(y, s1);
+                    return s1;
+                }).collect(toList());
+        if (slist.isEmpty())return null;
+        return slist;
     }
 }

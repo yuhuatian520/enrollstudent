@@ -104,7 +104,7 @@ public class SchoolManagerController
      */
     @PostMapping("selectschoolmanagerinfos")
     public JsonResult querySchoolManagerInfoAlls(@RequestParam(required = false,defaultValue = "1") Integer startPage,
-                                                 @RequestParam(required = false,defaultValue = "6") Integer pageSize){
+                                                 @RequestParam(required = false,defaultValue = "20") Integer pageSize){
         Page<SchoolManage> info = PageHelper.startPage(startPage, pageSize);
         List<SchoolManage> schoolManagerList = schoolManageService.querySchoolManagerInfosByAlls();
         return JsonResult.ok(schoolManagerList);
@@ -118,7 +118,7 @@ public class SchoolManagerController
      */
     @GetMapping("vaguesearchschoolinfo")
     public JsonResult vagueSearchSchoolInfos(@RequestParam(required = false,defaultValue = "1") Integer startPage,
-                                             @RequestParam(required = false,defaultValue = "6") Integer pageSize,
+                                             @RequestParam(required = false,defaultValue = "20") Integer pageSize,
                                              @RequestParam(required = false)  String schoolName,
                                              @RequestParam(required = false)  String schoolAddress
     ) {
@@ -168,7 +168,6 @@ public class SchoolManagerController
         }).join();
         return JsonResult.ok();
     }
-
 
 
 

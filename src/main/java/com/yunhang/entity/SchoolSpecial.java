@@ -1,5 +1,6 @@
 package com.yunhang.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import java.util.Date;
  * \* Description:
  * \
  */
+
 @Data
 @Table(name = "school_special")
 public class SchoolSpecial {
@@ -24,18 +26,21 @@ public class SchoolSpecial {
      */
     @Id
     @Column(name = "special_id")
+    @Excel(name = "序号")
     private Integer specialId;
 
     /**
      * 专业名称
      */
     @Column(name = "special_name")
+    @Excel(name = "名称")
     private String specialName;
 
     /**
      * 专业介绍
      */
     @Column(name = "special_presentation")
+    @Excel(name = "专业介绍")
     private String specialPresentation;
 
     /**
@@ -90,7 +95,8 @@ public class SchoolSpecial {
      * 专业编号
      */
     @Column(name = "special_code")
-    private Integer specialCode;
+    @Excel(name = "专业代码")
+    private String specialCode;
 
     /**
      * 数据包编号
@@ -102,6 +108,7 @@ public class SchoolSpecial {
      * 男女比例
      */
     @Column(name = "special_ratio_sex")
+    @Excel(name = "男女比例")
     private String specialRatioSex;
 
     /**

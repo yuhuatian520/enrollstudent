@@ -2,7 +2,9 @@ package com.yunhang.service;
 
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
-import com.yunhang.dto.SchoolManagerDto;
+import com.yunhang.dto.vo.SchoolManageAddress;
+import com.yunhang.dto.vo.SchoolManagerRecommendVo;
+import com.yunhang.dto.vo.SchoolSpecialInfoRecommendVo;
 import com.yunhang.entity.*;
 import com.yunhang.mapper.*;
 import com.yunhang.utils.RandomNumberGenerator;
@@ -18,9 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+
+import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @Service
@@ -41,6 +45,8 @@ public class SchoolManageService{
     private ThreeSpecialKindofMapper threeSpecialKindofMapper;
     @Resource
     private SchoolSpecialMapper schoolSpecialMapper;
+    @Resource
+    private SchoolManagerImgMapper schoolManagerImgMapper;
 
 
     /**
@@ -90,7 +96,11 @@ public class SchoolManageService{
      */
     public SchoolManage querySchoolManagerInfoBySchoolId(Integer schoolId) {
         if (schoolId > 0) {
-            return schoolManageMapper.selectByPrimaryKey(schoolId);
+            val schoolManagerImg = new SchoolManagerImg();
+                schoolManagerImg.setSchoolId(schoolId);
+            SchoolManage ss1 = schoolManageMapper.selectByPrimaryKey(schoolId);
+            ss1.setSchoolManagerImgLists(schoolManagerImgMapper.select(schoolManagerImg));
+            return ss1;
         }
         return null;
     }
@@ -123,23 +133,18 @@ public class SchoolManageService{
      * @param schoolAddress
      * @return
      */
-    public List<SchoolManagerDto> querySchoolManagerInfosBySchoolAddress(String schoolAddress) {
-        List<SchoolManagerDto> list2 = new ArrayList<>();
+    public List<SchoolManageAddress> querySchoolManagerInfosBySchoolAddress(String schoolAddress) {
         Example example = new Example(SchoolManage.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("schoolId");
         criteria.andLike("schoolAddress","%"+schoolAddress+"%");
-        List<SchoolManage> list = schoolManageMapper.selectByExample(example);
-
-        for (SchoolManage schoolManage : list) {
-            SchoolManagerDto schoolManageDto = new SchoolManagerDto();
-            schoolManageDto.setSchoolId(schoolManage.getSchoolId());
-            schoolManageDto.setSchoolName(schoolManage.getSchoolName());
-            schoolManageDto.setSchoolPresentation(schoolManage.getSchoolPresentation());
-            BeanUtils.copyProperties(schoolManage,schoolManageDto);
-            list2.add(schoolManageDto);
-        }
-        return list2;
+        List<SchoolManageAddress> slist = schoolManageMapper.selectByExample(example).
+                stream().map(s -> {
+            val school = new SchoolManageAddress();
+            BeanUtils.copyProperties(s, school);
+            return school;
+        }).collect(toList());
+        return slist;
     }
 
         /**
@@ -204,6 +209,8 @@ public class SchoolManageService{
                     List<SchoolSpecial> list4 = ExcelImportUtil.importExcel(file.getInputStream(),
                             SchoolSpecial.class, ss4);
                     CompletableFuture.runAsync(()->list4.parallelStream().forEach(schoolManage -> {
+                        Short recommend=8;
+                        schoolManage.setSpecialRecommend(recommend);
                         schoolSpecialMapper.insertSelective(schoolManage);
                     }));
                     return "导入成功";
@@ -224,8 +231,52 @@ public class SchoolManageService{
     }
 
 
+    public List findSchoolManagerByRecommend(Integer sign) {
+        if (sign==1){
+            List<SchoolManagerRecommendVo>
+                    schoolList=schoolManageMapper.selectAll().
+                    parallelStream().filter(x->x.getSchoolRecommend()==4).sorted(Comparator.comparing(SchoolManage::getSchoolId)).map(y->{
+                val  schoolManageRecommend=new    SchoolManagerRecommendVo();
+                BeanUtils.copyProperties(y,schoolManageRecommend);
+                return schoolManageRecommend;
+            }).collect(toList());
+                if (schoolList.isEmpty())return null;
+                return schoolList;
+        }else{
+            List<SchoolSpecialInfoRecommendVo> schoolSpecialInfoRecommendVoList =
+                    schoolSpecialMapper.selectAll().parallelStream().filter(x -> x.getSpecialRecommend() == 4)
+                    .sorted(Comparator.comparing(SchoolSpecial::getSpecialId)).map(z -> {
+                        val schoolSpecialInfoRecommendVo = new SchoolSpecialInfoRecommendVo();
+                        //获取到specialId,查出二级分类
+                        val threeSpecialKindof = new ThreeSpecialKindof();
+                        threeSpecialKindof.setThreeSpecialId(z.getSpecialId());
+                        val threeSpecials = threeSpecialKindofMapper.selectByPrimaryKey(threeSpecialKindof);
+                        val specialKind = new SpecialKindof();
+                        specialKind.setSpecialKindId(threeSpecials.getSpecialKindId());
+                        val specialKinds = specialKindofMapper.selectByPrimaryKey(specialKind);
+                        schoolSpecialInfoRecommendVo.setSpecialKindName(specialKinds.getSpecialKindName());
+                        BeanUtils.copyProperties(specialKinds, schoolSpecialInfoRecommendVo);
+                        BeanUtils.copyProperties(z, schoolSpecialInfoRecommendVo);
+                        return schoolSpecialInfoRecommendVo;
+                    }).collect(toList());
 
+            if (schoolSpecialInfoRecommendVoList.isEmpty())return null;
+            return schoolSpecialInfoRecommendVoList;
+        }
 
+        }
 
+    public List findSchoolManageAddressInfos() {
+        List<SchoolManageAddress> slist = schoolManageMapper.selectAll().parallelStream().
+                sorted(Comparator.comparing(SchoolManage::getSchoolId)).map(s -> {
+            val schoolManage = new SchoolManageAddress();
+            BeanUtils.copyProperties(s, schoolManage);
+            return schoolManage;
+        }).collect(toList());
+       if (slist.isEmpty())return null;
+       return slist;
+    }
 }
+
+
 

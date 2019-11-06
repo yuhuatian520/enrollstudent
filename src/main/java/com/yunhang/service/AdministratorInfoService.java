@@ -1,12 +1,12 @@
 package com.yunhang.service;
 
 import com.yunhang.entity.AdministratorInfo;
-import com.yunhang.utils.RandomNumberGenerator;
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
 import com.yunhang.mapper.AdministratorInfoMapper;
-import tk.mybatis.mapper.entity.Example;
+import com.yunhang.utils.RandomNumberGenerator;
+import lombok.val;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -44,5 +44,20 @@ public class AdministratorInfoService{
         administratorInfo.setAdministratorId(Integer.valueOf(RandomNumberGenerator.generateNumber()).toString());
         administratorInfo.setRole((short) 4);
         return administratorInfoMapper.insertSelective(administratorInfo);
+    }
+
+
+    public  AdministratorInfo findAdministratorInfoById(String administratorId){
+       val admin=new AdministratorInfo();
+       admin.setAdministratorId(administratorId);
+        return administratorInfoMapper.selectByPrimaryKey(admin);
+
+    }
+
+
+    public AdministratorInfo findAdministratorInfoByAdminame(String administratorName) {
+
+       val admin=administratorInfoMapper.selectByName(administratorName);
+        return admin;
     }
 }

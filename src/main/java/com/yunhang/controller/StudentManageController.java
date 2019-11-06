@@ -3,13 +3,11 @@ package com.yunhang.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.yunhang.entity.SchoolManage;
 import com.yunhang.entity.StudentManage;
 import com.yunhang.service.StudentManageService;
 import com.yunhang.utils.JsonResult;
 import com.yunhang.utils.ReturnCode;
 import com.yunhang.utils.alibabautils.AliBaBaUploadUtil;
-import com.yunhang.utils.alibabautils.LocalUploadUtil;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +37,7 @@ public class StudentManageController {
      */
     @RequestMapping("selectallstudentinfo")
     public JsonResult queryAllStudentInfo(@RequestParam(required = false,defaultValue = "1") Integer startPage,
-                                          @RequestParam(required = false,defaultValue = "6") Integer pageSize){
+                                          @RequestParam(required = false,defaultValue = "20") Integer pageSize){
 
         Page<StudentManage> info = PageHelper.startPage(startPage, pageSize);
         List<StudentManage> studentManagerList = studentManageService.queryAllStudentInfo();

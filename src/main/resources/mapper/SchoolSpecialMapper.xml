@@ -15,7 +15,7 @@
     <result column="special_people_plan" jdbcType="BIGINT" property="specialPeoplePlan" />
     <result column="special_practical" jdbcType="BIGINT" property="specialPractical" />
     <result column="special_grade" jdbcType="DOUBLE" property="specialGrade" />
-    <result column="special_code" jdbcType="INTEGER" property="specialCode" />
+    <result column="special_code" jdbcType="VARCHAR" property="specialCode" />
     <result column="data_package_id" jdbcType="VARCHAR" property="dataPackageId" />
     <result column="special_ratio_sex" jdbcType="VARCHAR" property="specialRatioSex" />
     <result column="special_ratio_type" jdbcType="VARCHAR" property="specialRatioType" />

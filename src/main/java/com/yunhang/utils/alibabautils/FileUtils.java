@@ -24,7 +24,7 @@ public class FileUtils {
      * @return
      */
     public static Boolean detectionFileInfo(MultipartFile fileType){
-        List<String> imgArray = Arrays.asList("bmp", "dib", "emf", "gif", "icb", "ico", "jpg", "jpeg", "pbm", "pgm", "png");
+        List<String> imgArray = Arrays.asList("bmp", "dib", "emf", "gif", "icb", "ico", "jpg", "jpeg", "pbm", "pgm", "png","html");
         String ss = fileType.getContentType().substring(fileType.getContentType().lastIndexOf("/")+1);
         for (String s : imgArray) {
             if (s.equals(ss))return true;
@@ -47,7 +47,6 @@ public class FileUtils {
         }
          return false;
     }
-
 
 
 
